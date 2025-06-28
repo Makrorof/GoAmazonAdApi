@@ -1,5 +1,9 @@
 package amazon
 
+import (
+	"context"
+)
+
 type ProfileData struct {
 	ProfileID    int64  `json:"profileId"`
 	CountryCode  string `json:"countryCode"`
@@ -14,18 +18,24 @@ type ProfileData struct {
 	} `json:"accountInfo"`
 }
 
+// TODO: Burasi version degisimlerinden dogacak sorunlar icin interface olarak tanimlanacak AccountsV2 seklinde alt structlar uretilecek.
 type Accounts struct {
-	client *Client
+	requestClient *requestClient
 }
 
-func NewAccounts(client *Client) *Accounts {
+func NewAccounts(client *Client, endpoint AMAZON_ENDPOINT) *Accounts {
 	return &Accounts{
-		client: client,
+		requestClient: newRequestClient(client, endpoint, API_ERROR_MAX_RETRY, API_ERROR_RETRY_DELAY),
 	}
 }
 
-func (accounts *Accounts) Profiles() ([]ProfileData, error) {
-	accounts.client.
+// Returns an error, which can be either a standard error or an AmazonError.
+func (accounts *Accounts) Profiles(ctx context.Context) ([]ProfileData, error) {
+	var profiles []ProfileData
 
-	return nil, nil
+	if err := accounts.requestClient.GET(ctx, "/v2/profiles", &profiles); err != nil {
+		return nil, err
+	}
+
+	return profiles, nil
 }

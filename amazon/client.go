@@ -2,6 +2,7 @@ package amazon
 
 import (
 	"context"
+	"errors"
 	"log"
 	"net/http"
 	"os"
@@ -12,12 +13,15 @@ import (
 )
 
 type Client struct {
-	clientMu sync.Mutex
-	client   *http.Client
+	//PRIVATE
+	mu     sync.Mutex
+	client *http.Client
 
 	clientId     string
 	clientSecret string
+	tokenSource  oauth2.TokenSource
 
+	//PUBLIC
 	UserAgent string
 }
 
@@ -41,7 +45,7 @@ func NewClient(httpClient *http.Client, clientId string, clientSecret string) *C
 		}
 	}
 	httpClient2 := *httpClient
-	c := &Client{client: &httpClient2, clientId: clientId, clientSecret: clientSecret}
+	c := &Client{client: &httpClient2, clientId: clientId, clientSecret: clientSecret, UserAgent: "Makrorof/GoAmazonAdAPI"}
 	c.init()
 	return c
 }
@@ -59,12 +63,12 @@ func NewClientWithEnv(ctx context.Context, httpClient *http.Client) *Client {
 	}
 
 	client := NewClient(httpClient, clientId, clientSecret)
-	client.WithToken(ctx, accessToken, refreshToken)
+	client = client.WithToken(ctx, accessToken, refreshToken)
 	return client
 }
 
 func (c *Client) clone() *Client {
-	c.clientMu.Lock()
+	c.mu.Lock()
 
 	clone := Client{
 		client:       &http.Client{},
@@ -72,7 +76,7 @@ func (c *Client) clone() *Client {
 		clientId:     c.clientId,
 		clientSecret: c.clientSecret,
 	}
-	c.clientMu.Unlock()
+	c.mu.Unlock()
 	if c.client != nil {
 		clone.client.Transport = c.client.Transport
 		clone.client.CheckRedirect = c.client.CheckRedirect
@@ -91,6 +95,7 @@ func (c *Client) WithTokenSource(ctx context.Context, tokenSource oauth2.TokenSo
 	c2 := c.clone()
 	defer c2.init()
 
+	c2.tokenSource = tokenSource
 	c2.client.Transport = &oauth2.Transport{
 		Source: tokenSource,
 		Base:   c2.client.Transport,
@@ -127,4 +132,16 @@ func (c *Client) WithCode(ctx context.Context, code string, redirectURL string, 
 	}
 
 	return c.WithTokenSource(ctx, config.TokenSource(ctx, token)), nil
+}
+
+func (c *Client) updateToken() error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.tokenSource == nil {
+		return errors.New("token source not found")
+	}
+
+	_, err := c.tokenSource.Token()
+	return err
 }
