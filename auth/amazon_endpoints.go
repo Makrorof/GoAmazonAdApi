@@ -1,4 +1,4 @@
-package amazon
+package auth
 
 import (
 	"net/url"

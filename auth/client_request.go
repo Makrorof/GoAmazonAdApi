@@ -1,4 +1,4 @@
-package amazon
+package auth
 
 import (
 	"context"
@@ -9,9 +9,11 @@ import (
 	"net/http"
 	"reflect"
 	"time"
+
+	"github.com/Makrorof/GoAmazonAdApi"
 )
 
-type requestClient struct {
+type RequestClient struct {
 	client *Client
 
 	retryCount    int
@@ -20,8 +22,8 @@ type requestClient struct {
 	endpoint AMAZON_ENDPOINT
 }
 
-func newRequestClient(client *Client, endpoint AMAZON_ENDPOINT, retryCount int, retryDuration time.Duration) *requestClient {
-	return &requestClient{
+func NewRequestClient(client *Client, endpoint AMAZON_ENDPOINT, retryCount int, retryDuration time.Duration) *RequestClient {
+	return &RequestClient{
 		client:        client,
 		retryCount:    retryCount,
 		retryDuration: retryDuration,
@@ -29,8 +31,8 @@ func newRequestClient(client *Client, endpoint AMAZON_ENDPOINT, retryCount int, 
 	}
 }
 
-// Returns an error, which can be either a standard error or an AmazonError.
-func (c *requestClient) GET(ctx context.Context, apiPath string, target any) error {
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (c *RequestClient) GET(ctx context.Context, apiPath string, target any, header map[string][]string) error {
 	rv := reflect.ValueOf(target)
 	if rv.Kind() != reflect.Pointer || rv.IsNil() {
 		return errors.New("target must be a non-nil pointer")
@@ -45,11 +47,19 @@ func (c *requestClient) GET(ctx context.Context, apiPath string, target any) err
 			return err
 		}
 
-		req.Header = map[string][]string{
-			"Accept":                          {"application/json"},
+		h := map[string][]string{
+			"Accept":                          {"*/*"},
+			"Content-Type":                    {"application/json"}, //
 			"Amazon-Advertising-API-ClientId": {c.client.clientId},
 			"User-Agent":                      {c.client.UserAgent},
 		}
+
+		for k, v := range header {
+			h[k] = v
+		}
+
+		req.Header = h
+
 		resp, err := c.client.client.Do(req)
 		if err != nil {
 			lastErr = err
@@ -64,7 +74,7 @@ func (c *requestClient) GET(ctx context.Context, apiPath string, target any) err
 			return err
 		}
 
-		if DEBUG_PRINT_API_BODY {
+		if GoAmazonAdApi.DEBUG_PRINT_API_BODY {
 			fmt.Printf("DEBUG | endpoint: %s, apiPath: %s, body: %s \n", c.endpoint, apiPath, string(body))
 		}
 
@@ -79,7 +89,7 @@ func (c *requestClient) GET(ctx context.Context, apiPath string, target any) err
 
 		//AMAZON API: This is the universal format for error response objects.
 		//her turlu error datasi veriyor.
-		amazonErrorData := new(AmazonError)
+		amazonErrorData := new(GoAmazonAdApi.AmazonError)
 		if err := json.Unmarshal(body, amazonErrorData); err != nil {
 			return err
 		}
@@ -103,7 +113,7 @@ func (c *requestClient) GET(ctx context.Context, apiPath string, target any) err
 	return lastErr
 }
 
-func (c *requestClient) checkRequestStatus(statusCode int) bool {
+func (c *RequestClient) checkRequestStatus(statusCode int) bool {
 	//Amazon yogunluktan dolayi 500 - 502 - 504 - 429 verebilecegini soyluyor. Digerleri request hatasi veya izin hatasi olarak yorumluyoruz.
 	//Ek olarak gecmis token olabilecegini dusunerek 401 bir seferlik kabul ediyoruz.
 	return (statusCode >= 500 && statusCode <= 599 || statusCode == http.StatusTooManyRequests)
