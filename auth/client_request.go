@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -31,18 +32,17 @@ func NewRequestClient(client *Client, endpoint AMAZON_ENDPOINT, retryCount int, 
 	}
 }
 
-// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
-func (c *RequestClient) GET(ctx context.Context, apiPath string, target any, header map[string][]string) error {
-	rv := reflect.ValueOf(target)
+func (c *RequestClient) request(ctx context.Context, method string, apiPath string, header map[string][]string, body io.Reader, outBody any) error {
+	rv := reflect.ValueOf(outBody)
 	if rv.Kind() != reflect.Pointer || rv.IsNil() {
-		return errors.New("target must be a non-nil pointer")
+		return errors.New("outBody must be a non-nil pointer")
 	}
 
 	var lastErr error
 	var onceUnauthorizedError bool
 
 	for i := 0; i <= c.retryCount; i++ {
-		req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.endpoint.Join(apiPath), nil)
+		req, err := http.NewRequestWithContext(ctx, method, c.endpoint.Join(apiPath), body)
 		if err != nil {
 			return err
 		}
@@ -69,7 +69,7 @@ func (c *RequestClient) GET(ctx context.Context, apiPath string, target any, hea
 
 		defer resp.Body.Close()
 
-		body, err := io.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body) //Performans sorunu yaratabilir: json.NewDecoder(resp.Body).Decode(x) kullanilabilir.
 		if err != nil {
 			return err
 		}
@@ -81,7 +81,7 @@ func (c *RequestClient) GET(ctx context.Context, apiPath string, target any, hea
 		//success message parse
 		//100 - 399
 		if resp.StatusCode < 400 {
-			if err := json.Unmarshal(body, target); err != nil {
+			if err := json.Unmarshal(body, outBody); err != nil {
 				return err
 			}
 			return nil
@@ -111,6 +111,21 @@ func (c *RequestClient) GET(ctx context.Context, apiPath string, target any, hea
 	}
 
 	return lastErr
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (c *RequestClient) GET(ctx context.Context, apiPath string, header map[string][]string, outBody any) error {
+	return c.request(ctx, http.MethodGet, apiPath, header, nil, outBody)
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (c *RequestClient) POST(ctx context.Context, apiPath string, header map[string][]string, inBody any, outBody any) error {
+	body, err := json.Marshal(inBody)
+	if err != nil {
+		return err
+	}
+
+	return c.request(ctx, http.MethodPost, apiPath, header, bytes.NewBuffer(body), outBody)
 }
 
 func (c *RequestClient) checkRequestStatus(statusCode int) bool {

@@ -1,5 +1,18 @@
 package sponsoredProducts
 
+type TargetingExpressionType string
+type IncludeAnalysisType string
+
+const (
+	CLOSE_MATCH TargetingExpressionType = "CLOSE_MATCH"
+	LOOSE_MATCH TargetingExpressionType = "LOOSE_MATCH"
+	SUBSTITUTES TargetingExpressionType = "SUBSTITUTES"
+	COMPLEMENTS TargetingExpressionType = "COMPLEMENTS"
+
+	INCLUDE_ANALYSIS_TRUE  IncludeAnalysisType = "true"
+	INCLUDE_ANALYSIS_FALSE IncludeAnalysisType = "false"
+)
+
 type IGetBidRecommendationsRequest interface {
 	getNewResponse() IGetBidRecommendationsResponse
 	getVersion() int
@@ -9,14 +22,24 @@ type IGetBidRecommendationsResponse interface {
 }
 
 // region GetBidRecommendationsV5
-type GetBidRecommendationsRequestV5 struct {
+type GetBidRecommendationsExistingAdGroupRequestV5 struct {
 	TargetingExpressions []struct {
-		Type string `json:"type"`
+		Type TargetingExpressionType `json:"type"`
 	} `json:"targetingExpressions"`
-	CampaignID         string `json:"campaignId"`
-	RecommendationType string `json:"recommendationType"`
-	IncludeAnalysis    string `json:"includeAnalysis"`
-	AdGroupID          string `json:"adGroupId"`
+	CampaignID         string              `json:"campaignId"`
+	RecommendationType string              `json:"recommendationType"`
+	IncludeAnalysis    IncludeAnalysisType `json:"includeAnalysis"`
+	AdGroupID          string              `json:"adGroupId"`
+}
+
+type GetBidRecommendationsNewAdGroupRequestV5 struct {
+	TargetingExpressions []struct {
+		Type TargetingExpressionType `json:"type"`
+	} `json:"targetingExpressions"`
+	CampaignID         string              `json:"campaignId"`
+	RecommendationType string              `json:"recommendationType"`
+	IncludeAnalysis    IncludeAnalysisType `json:"includeAnalysis"`
+	AdGroupID          string              `json:"adGroupId"`
 }
 
 type GetBidRecommendationsResponseV5 struct {
@@ -80,11 +103,21 @@ type GetBidRecommendationsResponseV5 struct {
 	} `json:"bidRecommendations"`
 }
 
-func (r *GetBidRecommendationsRequestV5) getNewResponse() IGetBidRecommendationsResponse {
+// BIDS_FOR_NEW_AD_GROUP
+func (r *GetBidRecommendationsExistingAdGroupRequestV5) getNewResponse() IGetBidRecommendationsResponse {
 	return new(GetBidRecommendationsResponseV5)
 }
 
-func (r *GetBidRecommendationsRequestV5) getVersion() int {
+func (r *GetBidRecommendationsExistingAdGroupRequestV5) getVersion() int {
+	return 5
+}
+
+// BIDS_FOR_EXISTING_AD_GROUP
+func (r *GetBidRecommendationsNewAdGroupRequestV5) getNewResponse() IGetBidRecommendationsResponse {
+	return new(GetBidRecommendationsResponseV5)
+}
+
+func (r *GetBidRecommendationsNewAdGroupRequestV5) getVersion() int {
 	return 5
 }
 

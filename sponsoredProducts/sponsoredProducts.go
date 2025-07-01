@@ -24,7 +24,7 @@ func NewV3(c *auth.Client, endpoint auth.AMAZON_ENDPOINT) *SponsoredProducts {
 func (p *SponsoredProducts) GetBidRecommendations(ctx context.Context, request IGetBidRecommendationsRequest) (IGetBidRecommendationsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.GET(ctx, "/sp/targets/bid/recommendations", response, map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spthemebasedbidrecommendation.v%d+json", request.getVersion())}}); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/targets/bid/recommendations", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spthemebasedbidrecommendation.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 

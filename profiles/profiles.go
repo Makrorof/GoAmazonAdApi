@@ -36,7 +36,7 @@ func New(c *auth.Client, endpoint auth.AMAZON_ENDPOINT) *Profiles {
 func (p *Profiles) List(ctx context.Context) ([]ProfileData, error) {
 	var profiles []ProfileData
 
-	if err := p.requestClient.GET(ctx, "/v2/profiles", &profiles, nil); err != nil {
+	if err := p.requestClient.GET(ctx, "/v2/profiles", nil, &profiles); err != nil {
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (p *Profiles) List(ctx context.Context) ([]ProfileData, error) {
 func (p *Profiles) GetProfile(ctx context.Context, profileId int) (ProfileData, error) {
 	var profile ProfileData
 
-	if err := p.requestClient.GET(ctx, fmt.Sprintf("/v2/profiles/%d", profileId), &profile, nil); err != nil {
+	if err := p.requestClient.GET(ctx, fmt.Sprintf("/v2/profiles/%d", profileId), nil, &profile); err != nil {
 		return profile, err
 	}
 

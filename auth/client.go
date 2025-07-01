@@ -145,3 +145,16 @@ func (c *Client) updateToken() error {
 	_, err := c.tokenSource.Token()
 	return err
 }
+
+func (c *Client) RefreshToken() (string, error) {
+	if c.tokenSource == nil {
+		return "", nil
+	}
+
+	token, err := c.tokenSource.Token()
+	if err != nil {
+		return "", err
+	}
+
+	return token.RefreshToken, nil
+}

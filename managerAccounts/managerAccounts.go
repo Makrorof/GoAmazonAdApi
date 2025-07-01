@@ -39,7 +39,7 @@ func New(c *auth.Client, endpoint auth.AMAZON_ENDPOINT) *ManagerAccounts {
 func (p *ManagerAccounts) List(ctx context.Context) (ManagerAccountsData, error) {
 	var managerAccounts ManagerAccountsData
 
-	if err := p.requestClient.GET(ctx, "/managerAccounts", &managerAccounts, map[string][]string{"Content-Type": {"application/vnd.getmanageraccountsresponse.v1+json"}}); err != nil {
+	if err := p.requestClient.GET(ctx, "/managerAccounts", map[string][]string{"Content-Type": {"application/vnd.getmanageraccountsresponse.v1+json"}}, &managerAccounts); err != nil {
 		return managerAccounts, err
 	}
 
