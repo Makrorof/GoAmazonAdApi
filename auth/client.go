@@ -162,3 +162,21 @@ func (c *Client) RefreshToken() (string, error) {
 
 	return token.RefreshToken, nil
 }
+
+func (c *Client) Token() (*AmazonToken, error) {
+	if c.tokenSource == nil {
+		return nil, nil
+	}
+
+	token, err := c.tokenSource.Token()
+	if err != nil {
+		return nil, err
+	}
+
+	return &AmazonToken{
+		AccessToken:  token.AccessToken,
+		RefreshToken: token.RefreshToken,
+		TokenType:    token.TokenType,
+		ExpiresIn:    token.ExpiresIn,
+	}, nil
+}
