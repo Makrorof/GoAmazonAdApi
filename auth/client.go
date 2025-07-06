@@ -38,6 +38,10 @@ func createOauthConfig(clientId, clientSecret, redirectURL string, scopes ...str
 	}
 }
 
+func New(clientId string, clientSecret string) *Client {
+	return NewClient(nil, clientId, clientSecret)
+}
+
 func NewClient(httpClient *http.Client, clientId string, clientSecret string) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{
@@ -123,7 +127,7 @@ func (c *Client) WithAccessToken(ctx context.Context, accessToken string) *Clien
 	return c.WithToken(ctx, accessToken, "")
 }
 
-func (c *Client) WithCode(ctx context.Context, code string, redirectURL string, scopes []string) (*Client, error) {
+func (c *Client) WithCode(ctx context.Context, code string, redirectURL string, scopes ...string) (*Client, error) {
 	config := createOauthConfig(c.clientId, c.clientSecret, redirectURL, scopes...)
 
 	token, err := config.Exchange(ctx, code)
