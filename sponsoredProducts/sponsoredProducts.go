@@ -41,3 +41,47 @@ func (p *SponsoredProducts) GetKeywordsRecommendations(ctx context.Context, requ
 
 	return response, nil
 }
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) ListKeywords(ctx context.Context, request IListKeywordsRequest) (IListKeywordsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/keywords/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) CreateKeywords(ctx context.Context, request ICreateKeywordsRequest) (ICreateKeywordsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) DeleteKeywords(ctx context.Context, request IDeleteKeywordsRequest) (IDeleteKeywordsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) UpdateKeywords(ctx context.Context, request IUpdateKeywordsRequest) (IUpdateKeywordsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.PUT(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}

@@ -128,6 +128,16 @@ func (c *RequestClient) POST(ctx context.Context, apiPath string, header map[str
 	return c.request(ctx, http.MethodPost, apiPath, header, bytes.NewBuffer(body), outBody)
 }
 
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (c *RequestClient) PUT(ctx context.Context, apiPath string, header map[string][]string, inBody any, outBody any) error {
+	body, err := json.Marshal(inBody)
+	if err != nil {
+		return err
+	}
+
+	return c.request(ctx, http.MethodPut, apiPath, header, bytes.NewBuffer(body), outBody)
+}
+
 func (c *RequestClient) checkRequestStatus(statusCode int) bool {
 	//Amazon yogunluktan dolayi 500 - 502 - 504 - 429 verebilecegini soyluyor. Digerleri request hatasi veya izin hatasi olarak yorumluyoruz.
 	//Ek olarak gecmis token olabilecegini dusunerek 401 bir seferlik kabul ediyoruz.
