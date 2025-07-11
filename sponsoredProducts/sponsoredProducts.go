@@ -30,3 +30,14 @@ func (p *SponsoredProducts) GetBidRecommendations(ctx context.Context, request I
 
 	return response, nil
 }
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) GetKeywordsRecommendations(ctx context.Context, request IGetKeywordsRecommendationsRequest) (IGetKeywordsRecommendationsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/targets/keywords/recommendations", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spkeywordsrecommendation.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}

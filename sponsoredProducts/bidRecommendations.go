@@ -33,13 +33,25 @@ type GetBidRecommendationsExistingAdGroupRequestV5 struct {
 }
 
 type GetBidRecommendationsNewAdGroupRequestV5 struct {
+	Asins                []string `json:"asins"`
 	TargetingExpressions []struct {
 		Type TargetingExpressionType `json:"type"`
 	} `json:"targetingExpressions"`
-	CampaignID         string              `json:"campaignId"`
+	ProductDetailsList []struct {
+		GlobalStoreSetting struct {
+			CatalogSourceCountryCode string `json:"catalogSourceCountryCode"`
+		} `json:"globalStoreSetting"`
+		Asin string `json:"asin"`
+	} `json:"productDetailsList"`
+	Bidding struct {
+		Adjustments []struct {
+			Predicate  string `json:"predicate"`
+			Percentage string `json:"percentage"`
+		} `json:"adjustments"`
+		Strategy string `json:"strategy"`
+	} `json:"bidding"`
 	RecommendationType string              `json:"recommendationType"`
 	IncludeAnalysis    IncludeAnalysisType `json:"includeAnalysis"`
-	AdGroupID          string              `json:"adGroupId"`
 }
 
 type GetBidRecommendationsResponseV5 struct {
