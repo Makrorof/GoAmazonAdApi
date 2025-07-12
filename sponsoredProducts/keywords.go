@@ -124,7 +124,7 @@ type CreateKeywordsSuccessV3 struct {
 type CreateKeywordsErrorV3 struct {
 	ErrorType  string `json:"errorType"`
 	ErrorValue struct {
-		EntityStateError struct {
+		EntityStateError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			EntityType  string `json:"entityType"`
@@ -134,7 +134,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"entityStateError"`
-		MissingValueError struct {
+		MissingValueError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			Cause       struct {
@@ -143,7 +143,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"missingValueError"`
-		BiddingError struct {
+		BiddingError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			Cause       struct {
@@ -154,7 +154,7 @@ type CreateKeywordsErrorV3 struct {
 			LowerLimit string `json:"lowerLimit"`
 			Message    string `json:"message"`
 		} `json:"biddingError"`
-		DuplicateValueError struct {
+		DuplicateValueError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			Cause       struct {
@@ -163,7 +163,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"duplicateValueError"`
-		RangeError struct {
+		RangeError *struct {
 			Reason      string   `json:"reason"`
 			Marketplace string   `json:"marketplace"`
 			Allowed     []string `json:"allowed"`
@@ -175,7 +175,7 @@ type CreateKeywordsErrorV3 struct {
 			LowerLimit string `json:"lowerLimit"`
 			Message    string `json:"message"`
 		} `json:"rangeError"`
-		ParentEntityError struct {
+		ParentEntityError *struct {
 			Reason string `json:"reason"`
 			Cause  struct {
 				Location string `json:"location"`
@@ -183,7 +183,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"parentEntityError"`
-		OtherError struct {
+		OtherError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			Cause       struct {
@@ -192,7 +192,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"otherError"`
-		ThrottledError struct {
+		ThrottledError *struct {
 			Reason string `json:"reason"`
 			Cause  struct {
 				Location string `json:"location"`
@@ -200,7 +200,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"throttledError"`
-		EntityNotFoundError struct {
+		EntityNotFoundError *struct {
 			Reason     string `json:"reason"`
 			EntityType string `json:"entityType"`
 			Cause      struct {
@@ -210,7 +210,7 @@ type CreateKeywordsErrorV3 struct {
 			EntityID string `json:"entityId"`
 			Message  string `json:"message"`
 		} `json:"entityNotFoundError"`
-		TargetingClauseSetupError struct {
+		TargetingClauseSetupError *struct {
 			Reason      string `json:"reason"`
 			Marketplace string `json:"marketplace"`
 			Cause       struct {
@@ -219,7 +219,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"targetingClauseSetupError"`
-		LocaleError struct {
+		LocaleError *struct {
 			Reason string `json:"reason"`
 			Cause  struct {
 				Location string `json:"location"`
@@ -227,7 +227,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"localeError"`
-		MalformedValueError struct {
+		MalformedValueError *struct {
 			Reason      string `json:"reason"`
 			Fragment    string `json:"fragment"`
 			Marketplace string `json:"marketplace"`
@@ -237,7 +237,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"malformedValueError"`
-		BillingError struct {
+		BillingError *struct {
 			Reason string `json:"reason"`
 			Cause  struct {
 				Location string `json:"location"`
@@ -245,7 +245,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"billingError"`
-		EntityQuotaError struct {
+		EntityQuotaError *struct {
 			Reason     string `json:"reason"`
 			QuotaScope string `json:"quotaScope"`
 			EntityType string `json:"entityType"`
@@ -256,7 +256,7 @@ type CreateKeywordsErrorV3 struct {
 			} `json:"cause"`
 			Message string `json:"message"`
 		} `json:"entityQuotaError"`
-		InternalServerError struct {
+		InternalServerError *struct {
 			Reason string `json:"reason"`
 			Cause  struct {
 				Location string `json:"location"`
@@ -311,7 +311,7 @@ type DeleteKeywordsResponseV3 struct {
 			Errors []struct {
 				ErrorType  string `json:"errorType"`
 				ErrorValue struct {
-					EntityStateError struct {
+					EntityStateError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						EntityType  string `json:"entityType"`
@@ -321,7 +321,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"entityStateError"`
-					MissingValueError struct {
+					MissingValueError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -330,7 +330,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"missingValueError"`
-					BiddingError struct {
+					BiddingError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -341,7 +341,7 @@ type DeleteKeywordsResponseV3 struct {
 						LowerLimit string `json:"lowerLimit"`
 						Message    string `json:"message"`
 					} `json:"biddingError"`
-					DuplicateValueError struct {
+					DuplicateValueError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -350,7 +350,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"duplicateValueError"`
-					RangeError struct {
+					RangeError *struct {
 						Reason      string   `json:"reason"`
 						Marketplace string   `json:"marketplace"`
 						Allowed     []string `json:"allowed"`
@@ -362,7 +362,7 @@ type DeleteKeywordsResponseV3 struct {
 						LowerLimit string `json:"lowerLimit"`
 						Message    string `json:"message"`
 					} `json:"rangeError"`
-					ParentEntityError struct {
+					ParentEntityError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -370,7 +370,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"parentEntityError"`
-					OtherError struct {
+					OtherError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -379,7 +379,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"otherError"`
-					ThrottledError struct {
+					ThrottledError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -387,7 +387,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"throttledError"`
-					EntityNotFoundError struct {
+					EntityNotFoundError *struct {
 						Reason     string `json:"reason"`
 						EntityType string `json:"entityType"`
 						Cause      struct {
@@ -397,7 +397,7 @@ type DeleteKeywordsResponseV3 struct {
 						EntityID string `json:"entityId"`
 						Message  string `json:"message"`
 					} `json:"entityNotFoundError"`
-					TargetingClauseSetupError struct {
+					TargetingClauseSetupError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -406,7 +406,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"targetingClauseSetupError"`
-					LocaleError struct {
+					LocaleError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -414,7 +414,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"localeError"`
-					MalformedValueError struct {
+					MalformedValueError *struct {
 						Reason      string `json:"reason"`
 						Fragment    string `json:"fragment"`
 						Marketplace string `json:"marketplace"`
@@ -424,7 +424,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"malformedValueError"`
-					BillingError struct {
+					BillingError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -432,7 +432,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"billingError"`
-					EntityQuotaError struct {
+					EntityQuotaError *struct {
 						Reason     string `json:"reason"`
 						QuotaScope string `json:"quotaScope"`
 						EntityType string `json:"entityType"`
@@ -443,7 +443,7 @@ type DeleteKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"entityQuotaError"`
-					InternalServerError struct {
+					InternalServerError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -486,7 +486,7 @@ type UpdateKeywordsResponseV3 struct {
 			Errors []struct {
 				ErrorType  string `json:"errorType"`
 				ErrorValue struct {
-					EntityStateError struct {
+					EntityStateError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						EntityType  string `json:"entityType"`
@@ -496,7 +496,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"entityStateError"`
-					MissingValueError struct {
+					MissingValueError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -505,7 +505,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"missingValueError"`
-					BiddingError struct {
+					BiddingError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -516,7 +516,7 @@ type UpdateKeywordsResponseV3 struct {
 						LowerLimit string `json:"lowerLimit"`
 						Message    string `json:"message"`
 					} `json:"biddingError"`
-					DuplicateValueError struct {
+					DuplicateValueError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -525,7 +525,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"duplicateValueError"`
-					RangeError struct {
+					RangeError *struct {
 						Reason      string   `json:"reason"`
 						Marketplace string   `json:"marketplace"`
 						Allowed     []string `json:"allowed"`
@@ -537,7 +537,7 @@ type UpdateKeywordsResponseV3 struct {
 						LowerLimit string `json:"lowerLimit"`
 						Message    string `json:"message"`
 					} `json:"rangeError"`
-					ParentEntityError struct {
+					ParentEntityError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -545,7 +545,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"parentEntityError"`
-					OtherError struct {
+					OtherError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -554,7 +554,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"otherError"`
-					ThrottledError struct {
+					ThrottledError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -562,7 +562,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"throttledError"`
-					EntityNotFoundError struct {
+					EntityNotFoundError *struct {
 						Reason     string `json:"reason"`
 						EntityType string `json:"entityType"`
 						Cause      struct {
@@ -572,7 +572,7 @@ type UpdateKeywordsResponseV3 struct {
 						EntityID string `json:"entityId"`
 						Message  string `json:"message"`
 					} `json:"entityNotFoundError"`
-					TargetingClauseSetupError struct {
+					TargetingClauseSetupError *struct {
 						Reason      string `json:"reason"`
 						Marketplace string `json:"marketplace"`
 						Cause       struct {
@@ -581,7 +581,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"targetingClauseSetupError"`
-					LocaleError struct {
+					LocaleError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -589,7 +589,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"localeError"`
-					MalformedValueError struct {
+					MalformedValueError *struct {
 						Reason      string `json:"reason"`
 						Fragment    string `json:"fragment"`
 						Marketplace string `json:"marketplace"`
@@ -599,7 +599,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"malformedValueError"`
-					BillingError struct {
+					BillingError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`
@@ -607,7 +607,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"billingError"`
-					EntityQuotaError struct {
+					EntityQuotaError *struct {
 						Reason     string `json:"reason"`
 						QuotaScope string `json:"quotaScope"`
 						EntityType string `json:"entityType"`
@@ -618,7 +618,7 @@ type UpdateKeywordsResponseV3 struct {
 						} `json:"cause"`
 						Message string `json:"message"`
 					} `json:"entityQuotaError"`
-					InternalServerError struct {
+					InternalServerError *struct {
 						Reason string `json:"reason"`
 						Cause  struct {
 							Location string `json:"location"`

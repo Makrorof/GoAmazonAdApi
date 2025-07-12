@@ -42,6 +42,8 @@ func (p *SponsoredProducts) GetKeywordsRecommendations(ctx context.Context, requ
 	return response, nil
 }
 
+//region keywords
+
 // Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
 func (p *SponsoredProducts) ListKeywords(ctx context.Context, request IListKeywordsRequest) (IListKeywordsResponse, error) {
 	response := request.getNewResponse()
@@ -85,3 +87,69 @@ func (p *SponsoredProducts) UpdateKeywords(ctx context.Context, request IUpdateK
 
 	return response, nil
 }
+
+//endregion keywords
+
+//region campaigns
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) CreateCampaigns(ctx context.Context, request ICreateCampaignsRequest, returnRepresentation bool) (ICreateCampaignsResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.POST(ctx, "/sp/campaigns", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) UpdateCampaigns(ctx context.Context, request IUpdateCampaignsRequest, returnRepresentation bool) (IUpdateCampaignsResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.PUT(ctx, "/sp/campaigns", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) DeleteCampaigns(ctx context.Context, request IDeleteCampaignsRequest) (IDeleteCampaignsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/campaigns/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) ListCampaigns(ctx context.Context, request IListCampaignsRequest) (IListCampaignsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/campaigns/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+//endregion campaigns
