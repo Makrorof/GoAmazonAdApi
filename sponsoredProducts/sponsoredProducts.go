@@ -153,3 +153,67 @@ func (p *SponsoredProducts) ListCampaigns(ctx context.Context, request IListCamp
 }
 
 //endregion campaigns
+
+//region adGroups
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) CreateAdGroups(ctx context.Context, request ICreateAdGroupsRequest, returnRepresentation bool) (ICreateAdGroupsResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.POST(ctx, "/sp/adGroups", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) UpdateAdGroups(ctx context.Context, request IUpdateAdGroupsRequest, returnRepresentation bool) (IUpdateAdGroupsResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.PUT(ctx, "/sp/adGroups", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) DeleteAdGroups(ctx context.Context, request IDeleteAdGroupsRequest) (IDeleteAdGroupsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/adGroups/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) ListAdGroups(ctx context.Context, request IListAdGroupsRequest) (IListAdGroupsResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/adGroups/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+//endregion adGroups
