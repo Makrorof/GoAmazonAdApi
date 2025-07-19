@@ -217,3 +217,67 @@ func (p *SponsoredProducts) ListAdGroups(ctx context.Context, request IListAdGro
 }
 
 //endregion adGroups
+
+//region targetingClauses
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) CreateTargetingClauses(ctx context.Context, request ICreateTargetingClausesRequest, returnRepresentation bool) (ICreateTargetingClausesResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.POST(ctx, "/sp/targets", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) UpdateTargetingClauses(ctx context.Context, request IUpdateTargetingClausesRequest, returnRepresentation bool) (IUpdateTargetingClausesResponse, error) {
+	response := request.getNewResponse()
+
+	header := map[string][]string{
+		"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
+	}
+
+	if returnRepresentation {
+		header["Prefer"] = []string{"return=representation"}
+	}
+
+	if err := p.requestClient.PUT(ctx, "/sp/targets", header, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) DeleteTargetingClauses(ctx context.Context, request IDeleteTargetingClausesRequest) (IDeleteTargetingClausesResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/targets/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+// Returns an error, which can be either a standard error or an GoAmazonAdApi.AmazonError.
+func (p *SponsoredProducts) ListTargetingClauses(ctx context.Context, request IListTargetingClausesRequest) (IListTargetingClausesResponse, error) {
+	response := request.getNewResponse()
+
+	if err := p.requestClient.POST(ctx, "/sp/targets/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
+		return response, err
+	}
+
+	return response, nil
+}
+
+//endregion targetingClauses
