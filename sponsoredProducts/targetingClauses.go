@@ -114,21 +114,12 @@ type CreateTargetingClausesSuccess struct {
 			Type  string `json:"type,omitempty"`
 			Value string `json:"value,omitempty"`
 		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string  `json:"campaignId,omitempty"`
-		ExpressionType string  `json:"expressionType,omitempty"`
-		State          string  `json:"state,omitempty"`
-		Bid            float64 `json:"bid,omitempty"`
-		AdGroupID      string  `json:"adGroupId,omitempty"`
-		ExtendedData   struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-			ServingStatus        string    `json:"servingStatus,omitempty"`
-			ServingStatusDetails []struct {
-				Name    string `json:"name,omitempty"`
-				HelpURL string `json:"helpUrl,omitempty"`
-				Message string `json:"message,omitempty"`
-			} `json:"servingStatusDetails,omitempty"`
-			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-		} `json:"extendedData,omitempty"`
+		CampaignID     string        `json:"campaignId,omitempty"`
+		ExpressionType string        `json:"expressionType,omitempty"`
+		State          string        `json:"state,omitempty"`
+		Bid            float64       `json:"bid,omitempty"`
+		AdGroupID      string        `json:"adGroupId,omitempty"`
+		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
 	} `json:"targetingClause,omitempty"`
 	TargetID string `json:"targetId,omitempty"`
 	Index    int    `json:"index,omitempty"`
@@ -136,154 +127,7 @@ type CreateTargetingClausesSuccess struct {
 type CreateTargetingClausesResponseV3 struct {
 	TargetingClauses struct {
 		Success []CreateTargetingClausesSuccess `json:"success,omitempty"`
-		Error   []struct {
-			Index  int `json:"index,omitempty"`
-			Errors []struct {
-				ErrorType  string `json:"errorType,omitempty"`
-				ErrorValue struct {
-					EntityStateError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						EntityType  string `json:"entityType,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityStateError,omitempty"`
-					MissingValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"missingValueError,omitempty"`
-					BiddingError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"biddingError,omitempty"`
-					DuplicateValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"duplicateValueError,omitempty"`
-					RangeError *struct {
-						Reason      string   `json:"reason,omitempty"`
-						Marketplace string   `json:"marketplace,omitempty"`
-						Allowed     []string `json:"allowed,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"rangeError,omitempty"`
-					ParentEntityError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"parentEntityError,omitempty"`
-					OtherError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"otherError,omitempty"`
-					ExpressionTypeError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"expressionTypeError,omitempty"`
-					ThrottledError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"throttledError,omitempty"`
-					EntityNotFoundError *struct {
-						Reason     string `json:"reason,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						EntityID string `json:"entityId,omitempty"`
-						Message  string `json:"message,omitempty"`
-					} `json:"entityNotFoundError,omitempty"`
-					TargetingClauseSetupError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"targetingClauseSetupError,omitempty"`
-					MalformedValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Fragment    string `json:"fragment,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"malformedValueError,omitempty"`
-					BillingError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"billingError,omitempty"`
-					EntityQuotaError *struct {
-						Reason     string `json:"reason,omitempty"`
-						QuotaScope string `json:"quotaScope,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Quota      string `json:"quota,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityQuotaError,omitempty"`
-					InternalServerError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"internalServerError,omitempty"`
-				} `json:"errorValue,omitempty"`
-			} `json:"errors,omitempty"`
-		} `json:"error,omitempty"`
+		Error   []Error                         `json:"error,omitempty"`
 	} `json:"targetingClauses,omitempty"`
 }
 
@@ -315,21 +159,12 @@ type DeleteTargetingClausesSuccess struct {
 			Type  string `json:"type,omitempty"`
 			Value string `json:"value,omitempty"`
 		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string  `json:"campaignId,omitempty"`
-		ExpressionType string  `json:"expressionType,omitempty"`
-		State          string  `json:"state,omitempty"`
-		Bid            float64 `json:"bid,omitempty"`
-		AdGroupID      string  `json:"adGroupId,omitempty"`
-		ExtendedData   struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-			ServingStatus        string    `json:"servingStatus,omitempty"`
-			ServingStatusDetails []struct {
-				Name    string `json:"name,omitempty"`
-				HelpURL string `json:"helpUrl,omitempty"`
-				Message string `json:"message,omitempty"`
-			} `json:"servingStatusDetails,omitempty"`
-			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-		} `json:"extendedData,omitempty"`
+		CampaignID     string        `json:"campaignId,omitempty"`
+		ExpressionType string        `json:"expressionType,omitempty"`
+		State          string        `json:"state,omitempty"`
+		Bid            float64       `json:"bid,omitempty"`
+		AdGroupID      string        `json:"adGroupId,omitempty"`
+		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
 	} `json:"targetingClause,omitempty"`
 	TargetID string `json:"targetId,omitempty"`
 	Index    int    `json:"index,omitempty"`
@@ -337,154 +172,7 @@ type DeleteTargetingClausesSuccess struct {
 type DeleteTargetingClausesResponseV3 struct {
 	TargetingClauses struct {
 		Success []DeleteTargetingClausesSuccess `json:"success,omitempty"`
-		Error   []struct {
-			Index  int `json:"index,omitempty"`
-			Errors []struct {
-				ErrorType  string `json:"errorType,omitempty"`
-				ErrorValue struct {
-					EntityStateError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						EntityType  string `json:"entityType,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityStateError,omitempty"`
-					MissingValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"missingValueError,omitempty"`
-					BiddingError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"biddingError,omitempty"`
-					DuplicateValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"duplicateValueError,omitempty"`
-					RangeError *struct {
-						Reason      string   `json:"reason,omitempty"`
-						Marketplace string   `json:"marketplace,omitempty"`
-						Allowed     []string `json:"allowed,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"rangeError,omitempty"`
-					ParentEntityError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"parentEntityError,omitempty"`
-					OtherError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"otherError,omitempty"`
-					ExpressionTypeError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"expressionTypeError,omitempty"`
-					ThrottledError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"throttledError,omitempty"`
-					EntityNotFoundError *struct {
-						Reason     string `json:"reason,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						EntityID string `json:"entityId,omitempty"`
-						Message  string `json:"message,omitempty"`
-					} `json:"entityNotFoundError,omitempty"`
-					TargetingClauseSetupError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"targetingClauseSetupError,omitempty"`
-					MalformedValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Fragment    string `json:"fragment,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"malformedValueError,omitempty"`
-					BillingError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"billingError,omitempty"`
-					EntityQuotaError *struct {
-						Reason     string `json:"reason,omitempty"`
-						QuotaScope string `json:"quotaScope,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Quota      string `json:"quota,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityQuotaError,omitempty"`
-					InternalServerError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"internalServerError,omitempty"`
-				} `json:"errorValue,omitempty"`
-			} `json:"errors,omitempty"`
-		} `json:"error,omitempty"`
+		Error   []Error                         `json:"error,omitempty"`
 	} `json:"targetingClauses,omitempty"`
 }
 
@@ -523,21 +211,12 @@ type UpdateTargetingClausesSuccess struct {
 			Type  string `json:"type,omitempty"`
 			Value string `json:"value,omitempty"`
 		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string  `json:"campaignId,omitempty"`
-		ExpressionType string  `json:"expressionType,omitempty"`
-		State          string  `json:"state,omitempty"`
-		Bid            float64 `json:"bid,omitempty"`
-		AdGroupID      string  `json:"adGroupId,omitempty"`
-		ExtendedData   struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-			ServingStatus        string    `json:"servingStatus,omitempty"`
-			ServingStatusDetails []struct {
-				Name    string `json:"name,omitempty"`
-				HelpURL string `json:"helpUrl,omitempty"`
-				Message string `json:"message,omitempty"`
-			} `json:"servingStatusDetails,omitempty"`
-			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-		} `json:"extendedData,omitempty"`
+		CampaignID     string        `json:"campaignId,omitempty"`
+		ExpressionType string        `json:"expressionType,omitempty"`
+		State          string        `json:"state,omitempty"`
+		Bid            float64       `json:"bid,omitempty"`
+		AdGroupID      string        `json:"adGroupId,omitempty"`
+		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
 	} `json:"targetingClause,omitempty"`
 	TargetID string `json:"targetId,omitempty"`
 	Index    int    `json:"index,omitempty"`
@@ -545,154 +224,7 @@ type UpdateTargetingClausesSuccess struct {
 type UpdateTargetingClausesResponseV3 struct {
 	TargetingClauses struct {
 		Success []UpdateTargetingClausesSuccess `json:"success,omitempty"`
-		Error   []struct {
-			Index  int `json:"index,omitempty"`
-			Errors []struct {
-				ErrorType  string `json:"errorType,omitempty"`
-				ErrorValue struct {
-					EntityStateError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						EntityType  string `json:"entityType,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityStateError,omitempty"`
-					MissingValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"missingValueError,omitempty"`
-					BiddingError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"biddingError,omitempty"`
-					DuplicateValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"duplicateValueError,omitempty"`
-					RangeError *struct {
-						Reason      string   `json:"reason,omitempty"`
-						Marketplace string   `json:"marketplace,omitempty"`
-						Allowed     []string `json:"allowed,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						UpperLimit string `json:"upperLimit,omitempty"`
-						LowerLimit string `json:"lowerLimit,omitempty"`
-						Message    string `json:"message,omitempty"`
-					} `json:"rangeError,omitempty"`
-					ParentEntityError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"parentEntityError,omitempty"`
-					OtherError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"otherError,omitempty"`
-					ExpressionTypeError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"expressionTypeError,omitempty"`
-					ThrottledError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"throttledError,omitempty"`
-					EntityNotFoundError *struct {
-						Reason     string `json:"reason,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						EntityID string `json:"entityId,omitempty"`
-						Message  string `json:"message,omitempty"`
-					} `json:"entityNotFoundError,omitempty"`
-					TargetingClauseSetupError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"targetingClauseSetupError,omitempty"`
-					MalformedValueError *struct {
-						Reason      string `json:"reason,omitempty"`
-						Fragment    string `json:"fragment,omitempty"`
-						Marketplace string `json:"marketplace,omitempty"`
-						Cause       struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"malformedValueError,omitempty"`
-					BillingError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"billingError,omitempty"`
-					EntityQuotaError *struct {
-						Reason     string `json:"reason,omitempty"`
-						QuotaScope string `json:"quotaScope,omitempty"`
-						EntityType string `json:"entityType,omitempty"`
-						Quota      string `json:"quota,omitempty"`
-						Cause      struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"entityQuotaError,omitempty"`
-					InternalServerError *struct {
-						Reason string `json:"reason,omitempty"`
-						Cause  struct {
-							Location string `json:"location,omitempty"`
-							Trigger  string `json:"trigger,omitempty"`
-						} `json:"cause,omitempty"`
-						Message string `json:"message,omitempty"`
-					} `json:"internalServerError,omitempty"`
-				} `json:"errorValue,omitempty"`
-			} `json:"errors,omitempty"`
-		} `json:"error,omitempty"`
+		Error   []Error                         `json:"error,omitempty"`
 	} `json:"targetingClauses,omitempty"`
 }
 

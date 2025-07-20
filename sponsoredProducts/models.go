@@ -1,5 +1,7 @@
 package sponsoredProducts
 
+import "time"
+
 type TargetingExpressionType string
 type IncludeAnalysisType string
 
@@ -83,4 +85,16 @@ type TargetsFilter struct {
 	Keyword             string  `json:"keyword,omitempty"`
 	Bid                 float64 `json:"bid,omitempty"`
 	UserSelectedKeyword bool    `json:"userSelectedKeyword,omitempty"`
+}
+
+type ServingStatusDetail struct {
+	Name    string `json:"name,omitempty"`
+	HelpURL string `json:"helpUrl,omitempty"`
+	Message string `json:"message,omitempty"`
+}
+type ExtendedData struct {
+	LastUpdateDateTime   time.Time             `json:"lastUpdateDateTime,omitempty"`
+	ServingStatus        string                `json:"servingStatus,omitempty"`
+	ServingStatusDetails []ServingStatusDetail `json:"servingStatusDetails,omitempty"`
+	CreationDateTime     time.Time             `json:"creationDateTime,omitempty"`
 }
