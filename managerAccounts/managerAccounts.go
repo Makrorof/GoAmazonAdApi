@@ -8,22 +8,22 @@ import (
 )
 
 type LinkedAccount struct {
-	MarketplaceID   string `json:"marketplaceId"`
-	AccountID       string `json:"accountId"`
-	AccountName     string `json:"accountName"`
-	ProfileID       string `json:"profileId"`
-	AccountType     string `json:"accountType"`
-	DspAdvertiserID string `json:"dspAdvertiserId"`
+	MarketplaceID   string `json:"marketplaceId,omitempty"`
+	AccountID       string `json:"accountId,omitempty"`
+	AccountName     string `json:"accountName,omitempty"`
+	ProfileID       string `json:"profileId,omitempty"`
+	AccountType     string `json:"accountType,omitempty"`
+	DspAdvertiserID string `json:"dspAdvertiserId,omitempty"`
 }
 
 type ManagerAccount struct {
-	ManagerAccountName string          `json:"managerAccountName"`
-	ManagerAccountID   string          `json:"managerAccountId"`
-	LinkedAccounts     []LinkedAccount `json:"linkedAccounts"`
+	ManagerAccountName string          `json:"managerAccountName,omitempty"`
+	ManagerAccountID   string          `json:"managerAccountId,omitempty"`
+	LinkedAccounts     []LinkedAccount `json:"linkedAccounts,omitempty"`
 }
 
 type ManagerAccountsData struct {
-	ManagerAccounts []ManagerAccount `json:"managerAccounts"`
+	ManagerAccounts []ManagerAccount `json:"managerAccounts,omitempty"`
 }
 type ManagerAccounts struct {
 	requestClient *auth.RequestClient

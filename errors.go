@@ -3,9 +3,9 @@ package GoAmazonAdApi
 import "fmt"
 
 type AmazonError struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-	Details string `json:"details"`
+	Code    string `json:"code,omitempty"`
+	Message string `json:"message,omitempty"`
+	Details string `json:"details,omitempty"`
 }
 
 func (e *AmazonError) Error() string {

@@ -10,77 +10,62 @@ type IGetKeywordsRecommendationsResponse interface {
 
 // region GetKeywordsRecommendationsV5
 type GetKeywordsRecommendationsAdGroupRequestV5 struct {
-	CampaignID         string `json:"campaignId"`
-	RecommendationType string `json:"recommendationType"`
-	BidsEnabled        string `json:"bidsEnabled"`
-	AdGroupID          string `json:"adGroupId"`
-	Targets            []struct {
-		MatchType           string  `json:"matchType"`
-		Keyword             string  `json:"keyword"`
-		Bid                 float64 `json:"bid"`
-		UserSelectedKeyword bool    `json:"userSelectedKeyword"`
-	} `json:"targets"`
-	MaxRecommendations string `json:"maxRecommendations"`
-	SortDimension      string `json:"sortDimension"`
-	Locale             string `json:"locale"`
+	CampaignID         string          `json:"campaignId,omitempty"`
+	RecommendationType string          `json:"recommendationType,omitempty"`
+	BidsEnabled        string          `json:"bidsEnabled,omitempty"`
+	AdGroupID          string          `json:"adGroupId,omitempty"`
+	Targets            []TargetsFilter `json:"targets,omitempty"`
+	MaxRecommendations string          `json:"maxRecommendations,omitempty"`
+	SortDimension      string          `json:"sortDimension,omitempty"`
+	Locale             string          `json:"locale,omitempty"`
 }
 
 type GetKeywordsRecommendationsAsinsRequestV5 struct {
-	Asins              []string `json:"asins"`
-	ProductDetailsList []struct {
-		GlobalStoreSetting struct {
-			CatalogSourceCountryCode string `json:"catalogSourceCountryCode"`
-		} `json:"globalStoreSetting"`
-		Asin string `json:"asin"`
-	} `json:"productDetailsList"`
-	BiddingStrategy    string `json:"biddingStrategy"`
-	RecommendationType string `json:"recommendationType"`
-	BidsEnabled        string `json:"bidsEnabled"`
-	Targets            []struct {
-		MatchType           string  `json:"matchType"`
-		Keyword             string  `json:"keyword"`
-		Bid                 float64 `json:"bid"`
-		UserSelectedKeyword bool    `json:"userSelectedKeyword"`
-	} `json:"targets"`
-	MaxRecommendations string `json:"maxRecommendations"`
-	SortDimension      string `json:"sortDimension"`
-	Locale             string `json:"locale"`
+	Asins              []string                   `json:"asins,omitempty"`
+	ProductDetailsList []ProductDetailsListFilter `json:"productDetailsList,omitempty"`
+	BiddingStrategy    string                     `json:"biddingStrategy,omitempty"`
+	RecommendationType string                     `json:"recommendationType,omitempty"`
+	BidsEnabled        string                     `json:"bidsEnabled,omitempty"`
+	Targets            []TargetsFilter            `json:"targets,omitempty"`
+	MaxRecommendations string                     `json:"maxRecommendations,omitempty"`
+	SortDimension      string                     `json:"sortDimension,omitempty"`
+	Locale             string                     `json:"locale,omitempty"`
 }
 
 type GetKeywordsRecommendationsResponseV5 struct {
 	KeywordTargetList []struct {
-		SearchTermImpressionShare int    `json:"searchTermImpressionShare"`
-		Translation               string `json:"translation"`
+		SearchTermImpressionShare int    `json:"searchTermImpressionShare,omitempty"`
+		Translation               string `json:"translation,omitempty"`
 		BidInfo                   []struct {
 			SuggestedBid struct {
-				Suggested  float64 `json:"suggested"`
-				RangeStart float64 `json:"rangeStart"`
-				RangeEnd   float64 `json:"rangeEnd"`
-			} `json:"suggestedBid"`
-			MatchType string `json:"matchType"`
-			Rank      int    `json:"rank"`
-			Theme     string `json:"theme"`
-			Bid       int    `json:"bid"`
-		} `json:"bidInfo"`
-		SearchTermImpressionRank int    `json:"searchTermImpressionRank"`
-		Keyword                  string `json:"keyword"`
-		UserSelectedKeyword      bool   `json:"userSelectedKeyword"`
-		RecID                    string `json:"recId"`
-	} `json:"keywordTargetList"`
+				Suggested  float64 `json:"suggested,omitempty"`
+				RangeStart float64 `json:"rangeStart,omitempty"`
+				RangeEnd   float64 `json:"rangeEnd,omitempty"`
+			} `json:"suggestedBid,omitempty"`
+			MatchType string `json:"matchType,omitempty"`
+			Rank      int    `json:"rank,omitempty"`
+			Theme     string `json:"theme,omitempty"`
+			Bid       int    `json:"bid,omitempty"`
+		} `json:"bidInfo,omitempty"`
+		SearchTermImpressionRank int    `json:"searchTermImpressionRank,omitempty"`
+		Keyword                  string `json:"keyword,omitempty"`
+		UserSelectedKeyword      bool   `json:"userSelectedKeyword,omitempty"`
+		RecID                    string `json:"recId,omitempty"`
+	} `json:"keywordTargetList,omitempty"`
 	ImpactMetrics []struct {
 		Clicks struct {
 			Values []struct {
-				Lower int `json:"lower"`
-				Upper int `json:"upper"`
-			} `json:"values"`
-		} `json:"clicks"`
+				Lower int `json:"lower,omitempty"`
+				Upper int `json:"upper,omitempty"`
+			} `json:"values,omitempty"`
+		} `json:"clicks,omitempty"`
 		Orders struct {
 			Values []struct {
-				Lower int `json:"lower"`
-				Upper int `json:"upper"`
-			} `json:"values"`
-		} `json:"orders"`
-	} `json:"impactMetrics"`
+				Lower int `json:"lower,omitempty"`
+				Upper int `json:"upper,omitempty"`
+			} `json:"values,omitempty"`
+		} `json:"orders,omitempty"`
+	} `json:"impactMetrics,omitempty"`
 }
 
 func (r *GetKeywordsRecommendationsAdGroupRequestV5) getNewResponse() IGetKeywordsRecommendationsResponse {

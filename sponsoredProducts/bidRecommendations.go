@@ -1,18 +1,5 @@
 package sponsoredProducts
 
-type TargetingExpressionType string
-type IncludeAnalysisType string
-
-const (
-	CLOSE_MATCH TargetingExpressionType = "CLOSE_MATCH"
-	LOOSE_MATCH TargetingExpressionType = "LOOSE_MATCH"
-	SUBSTITUTES TargetingExpressionType = "SUBSTITUTES"
-	COMPLEMENTS TargetingExpressionType = "COMPLEMENTS"
-
-	INCLUDE_ANALYSIS_TRUE  IncludeAnalysisType = "true"
-	INCLUDE_ANALYSIS_FALSE IncludeAnalysisType = "false"
-)
-
 type IGetBidRecommendationsRequest interface {
 	getNewResponse() IGetBidRecommendationsResponse
 	getVersion() int
@@ -23,96 +10,81 @@ type IGetBidRecommendationsResponse interface {
 
 // region GetBidRecommendationsV5
 type GetBidRecommendationsExistingAdGroupRequestV5 struct {
-	TargetingExpressions []struct {
-		Type TargetingExpressionType `json:"type"`
-	} `json:"targetingExpressions"`
-	CampaignID         string              `json:"campaignId"`
-	RecommendationType string              `json:"recommendationType"`
-	IncludeAnalysis    IncludeAnalysisType `json:"includeAnalysis"`
-	AdGroupID          string              `json:"adGroupId"`
+	TargetingExpressions []TargetingExpression `json:"targetingExpressions,omitempty"`
+	CampaignID           string                `json:"campaignId,omitempty"`
+	RecommendationType   string                `json:"recommendationType,omitempty"`
+	IncludeAnalysis      IncludeAnalysisType   `json:"includeAnalysis,omitempty"`
+	AdGroupID            string                `json:"adGroupId,omitempty"`
 }
 
 type GetBidRecommendationsNewAdGroupRequestV5 struct {
-	Asins                []string `json:"asins"`
-	TargetingExpressions []struct {
-		Type TargetingExpressionType `json:"type"`
-	} `json:"targetingExpressions"`
-	ProductDetailsList []struct {
-		GlobalStoreSetting struct {
-			CatalogSourceCountryCode string `json:"catalogSourceCountryCode"`
-		} `json:"globalStoreSetting"`
-		Asin string `json:"asin"`
-	} `json:"productDetailsList"`
-	Bidding struct {
-		Adjustments []struct {
-			Predicate  string `json:"predicate"`
-			Percentage string `json:"percentage"`
-		} `json:"adjustments"`
-		Strategy string `json:"strategy"`
-	} `json:"bidding"`
-	RecommendationType string              `json:"recommendationType"`
-	IncludeAnalysis    IncludeAnalysisType `json:"includeAnalysis"`
+	Asins                []string                   `json:"asins,omitempty"`
+	TargetingExpressions []TargetingExpression      `json:"targetingExpressions,omitempty"`
+	ProductDetailsList   []ProductDetailsListFilter `json:"productDetailsList,omitempty"`
+	Bidding              *BiddingFilter             `json:"bidding,omitempty"`
+	RecommendationType   string                     `json:"recommendationType,omitempty"`
+	IncludeAnalysis      IncludeAnalysisType        `json:"includeAnalysis,omitempty"`
 }
 
 type GetBidRecommendationsResponseV5 struct {
 	BidRecommendations []struct {
-		Theme                              string `json:"theme"`
+		Theme                              string `json:"theme,omitempty"`
 		BidAnalysesForTargetingExpressions []struct {
 			BidAnalyses struct {
 				ALL []struct {
-					Bid           string `json:"bid"`
-					Type          string `json:"type"`
+					Bid           string `json:"bid,omitempty"`
+					Type          string `json:"type,omitempty"`
 					ImpactMetrics struct {
-						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg"`
-						EstimatedImpressionUpper string `json:"estimatedImpressionUpper"`
-						EstimatedImpressionLower string `json:"estimatedImpressionLower"`
-					} `json:"impactMetrics"`
-				} `json:"ALL"`
+						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg,omitempty"`
+						EstimatedImpressionUpper string `json:"estimatedImpressionUpper,omitempty"`
+						EstimatedImpressionLower string `json:"estimatedImpressionLower,omitempty"`
+					} `json:"impactMetrics,omitempty"`
+				} `json:"ALL,omitempty"`
 				PLACEMENTTOP []struct {
-					Bid           string `json:"bid"`
-					Type          string `json:"type"`
+					Bid           string `json:"bid,omitempty"`
+					Type          string `json:"type,omitempty"`
 					ImpactMetrics struct {
-						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg"`
-						EstimatedImpressionUpper string `json:"estimatedImpressionUpper"`
-						EstimatedImpressionLower string `json:"estimatedImpressionLower"`
-					} `json:"impactMetrics"`
-				} `json:"PLACEMENT_TOP"`
+						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg,omitempty"`
+						EstimatedImpressionUpper string `json:"estimatedImpressionUpper,omitempty"`
+						EstimatedImpressionLower string `json:"estimatedImpressionLower,omitempty"`
+					} `json:"impactMetrics,omitempty"`
+				} `json:"PLACEMENT_TOP,omitempty"`
 				PLACEMENTRESTOFSEARCH []struct {
-					Bid           string `json:"bid"`
-					Type          string `json:"type"`
+					Bid           string `json:"bid,omitempty"`
+					Type          string `json:"type,omitempty"`
 					ImpactMetrics struct {
-						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg"`
-						EstimatedImpressionUpper string `json:"estimatedImpressionUpper"`
-						EstimatedImpressionLower string `json:"estimatedImpressionLower"`
-					} `json:"impactMetrics"`
-				} `json:"PLACEMENT_REST_OF_SEARCH"`
+						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg,omitempty"`
+						EstimatedImpressionUpper string `json:"estimatedImpressionUpper,omitempty"`
+						EstimatedImpressionLower string `json:"estimatedImpressionLower,omitempty"`
+					} `json:"impactMetrics,omitempty"`
+				} `json:"PLACEMENT_REST_OF_SEARCH,omitempty"`
 				PLACEMENTPRODUCTPAGE []struct {
-					Bid           string `json:"bid"`
-					Type          string `json:"type"`
+					Bid           string `json:"bid,omitempty"`
+					Type          string `json:"type,omitempty"`
 					ImpactMetrics struct {
-						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg"`
-						EstimatedImpressionUpper string `json:"estimatedImpressionUpper"`
-						EstimatedImpressionLower string `json:"estimatedImpressionLower"`
-					} `json:"impactMetrics"`
-				} `json:"PLACEMENT_PRODUCT_PAGE"`
-			} `json:"bidAnalyses"`
+						EstimatedImpressionAvg   string `json:"estimatedImpressionAvg,omitempty"`
+						EstimatedImpressionUpper string `json:"estimatedImpressionUpper,omitempty"`
+						EstimatedImpressionLower string `json:"estimatedImpressionLower,omitempty"`
+					} `json:"impactMetrics,omitempty"`
+				} `json:"PLACEMENT_PRODUCT_PAGE,omitempty"`
+			} `json:"bidAnalyses,omitempty"`
 			TargetingExpression struct {
-				Type string `json:"type"`
-			} `json:"targetingExpression"`
-		} `json:"bidAnalysesForTargetingExpressions"`
+				Type string `json:"type,omitempty"`
+			} `json:"targetingExpression,omitempty"`
+		} `json:"bidAnalysesForTargetingExpressions,omitempty"`
 		BidRecommendationsForTargetingExpressions []struct {
 			SuggestedBidImpactMetrics struct {
-				EstimatedImpressionUpper string `json:"estimatedImpressionUpper"`
-				EstimatedImpressionLower string `json:"estimatedImpressionLower"`
-			} `json:"suggestedBidImpactMetrics"`
+				EstimatedImpressionUpper string `json:"estimatedImpressionUpper,omitempty"`
+				EstimatedImpressionLower string `json:"estimatedImpressionLower,omitempty"`
+			} `json:"suggestedBidImpactMetrics,omitempty"`
 			BidValues []struct {
-				SuggestedBid string `json:"suggestedBid"`
-			} `json:"bidValues"`
+				SuggestedBid string `json:"suggestedBid,omitempty"`
+			} `json:"bidValues,omitempty"`
 			TargetingExpression struct {
-				Type string `json:"type"`
-			} `json:"targetingExpression"`
-		} `json:"bidRecommendationsForTargetingExpressions"`
-	} `json:"bidRecommendations"`
+				Type string `json:"type,omitempty"`
+			} `json:"targetingExpression,omitempty"`
+		} `json:"bidRecommendationsForTargetingExpressions,omitempty"`
+	} `json:"bidRecommendations,omitempty"`
 }
 
 // BIDS_FOR_NEW_AD_GROUP

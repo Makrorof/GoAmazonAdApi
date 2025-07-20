@@ -36,248 +36,228 @@ type IUpdateCampaignsResponse interface {
 
 // region CreateV3
 type CreateCampaignsV3CampaignData struct {
-	SiteRestrictions  []string `json:"siteRestrictions"`
-	PortfolioID       string   `json:"portfolioId"`
-	OffAmazonSettings struct {
-		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-	} `json:"offAmazonSettings"`
-	EndDate        string `json:"endDate"`
-	Name           string `json:"name"`
-	TargetingType  string `json:"targetingType"`
-	State          string `json:"state"`
-	DynamicBidding struct {
-		ShopperCohortBidding []struct {
-			ShopperCohortType string `json:"shopperCohortType"`
-			Percentage        int    `json:"percentage"`
-			AudienceSegments  []struct {
-				AudienceID          string `json:"audienceId"`
-				AudienceSegmentType string `json:"audienceSegmentType"`
-			} `json:"audienceSegments"`
-		} `json:"shopperCohortBidding"`
-		PlacementBidding []struct {
-			Percentage int    `json:"percentage"`
-			Placement  string `json:"placement"`
-		} `json:"placementBidding"`
-		Strategy string `json:"strategy"`
-	} `json:"dynamicBidding"`
-	StartDate string `json:"startDate"`
-	Budget    struct {
-		BudgetType string  `json:"budgetType"`
-		Budget     float64 `json:"budget"`
-	} `json:"budget"`
-	Tags map[string]string `json:"tags"`
+	SiteRestrictions  []string                `json:"siteRestrictions,omitempty"`
+	PortfolioID       string                  `json:"portfolioId,omitempty"`
+	OffAmazonSettings *OffAmazonSettingFilter `json:"offAmazonSettings,omitempty"`
+	EndDate           string                  `json:"endDate,omitempty"`
+	Name              string                  `json:"name,omitempty"`
+	TargetingType     string                  `json:"targetingType,omitempty"`
+	State             string                  `json:"state,omitempty"`
+	DynamicBidding    *DynamicBiddingFilter   `json:"dynamicBidding,omitempty"`
+	StartDate         string                  `json:"startDate,omitempty"`
+	Budget            *BudgetFilter           `json:"budget,omitempty"`
+	Tags              map[string]string       `json:"tags,omitempty"`
 }
 type CreateCampaignsV3Success struct {
-	CampaignID string `json:"campaignId"`
-	Index      int    `json:"index"`
+	CampaignID string `json:"campaignId,omitempty"`
+	Index      int    `json:"index,omitempty"`
 	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions"`
+		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
 		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-		} `json:"offAmazonSettings"`
-		EndDate        string `json:"endDate"`
-		CampaignID     string `json:"campaignId"`
+			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
+		} `json:"offAmazonSettings,omitempty"`
+		EndDate        string `json:"endDate,omitempty"`
+		CampaignID     string `json:"campaignId,omitempty"`
 		DynamicBidding struct {
 			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType"`
-				Percentage        int    `json:"percentage"`
+				ShopperCohortType string `json:"shopperCohortType,omitempty"`
+				Percentage        int    `json:"percentage,omitempty"`
 				AudienceSegments  []struct {
-				} `json:"audienceSegments"`
-			} `json:"shopperCohortBidding"`
+				} `json:"audienceSegments,omitempty"`
+			} `json:"shopperCohortBidding,omitempty"`
 			PlacementBidding []struct {
-				Percentage int    `json:"percentage"`
-				Placement  string `json:"placement"`
-			} `json:"placementBidding"`
-			Strategy string `json:"strategy"`
-		} `json:"dynamicBidding"`
-		Tags          map[string]string `json:"tags"`
-		PortfolioID   string            `json:"portfolioId"`
-		Name          string            `json:"name"`
-		TargetingType string            `json:"targetingType"`
-		State         string            `json:"state"`
-		StartDate     string            `json:"startDate"`
+				Percentage int    `json:"percentage,omitempty"`
+				Placement  string `json:"placement,omitempty"`
+			} `json:"placementBidding,omitempty"`
+			Strategy string `json:"strategy,omitempty"`
+		} `json:"dynamicBidding,omitempty"`
+		Tags          map[string]string `json:"tags,omitempty"`
+		PortfolioID   string            `json:"portfolioId,omitempty"`
+		Name          string            `json:"name,omitempty"`
+		TargetingType string            `json:"targetingType,omitempty"`
+		State         string            `json:"state,omitempty"`
+		StartDate     string            `json:"startDate,omitempty"`
 		Budget        struct {
-			BudgetType      string  `json:"budgetType"`
-			Budget          float64 `json:"budget"`
-			EffectiveBudget float64 `json:"effectiveBudget"`
-		} `json:"budget"`
+			BudgetType      string  `json:"budgetType,omitempty"`
+			Budget          float64 `json:"budget,omitempty"`
+			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
+		} `json:"budget,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"campaign"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"campaign,omitempty"`
 }
 type CreateCampaignsRequestV3 struct {
-	Campaigns []CreateCampaignsV3CampaignData `json:"campaigns"`
+	Campaigns []CreateCampaignsV3CampaignData `json:"campaigns,omitempty"`
 }
-
 type CreateCampaignsResponseV3 struct {
 	Campaigns struct {
-		Success []CreateCampaignsV3Success `json:"success"`
+		Success []CreateCampaignsV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					DateError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"dateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"dateError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BudgetError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"budgetError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"budgetError,omitempty"`
 					CurrencyError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"currencyError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"currencyError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"campaigns"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"campaigns,omitempty"`
 }
 
 func (r *CreateCampaignsRequestV3) getNewResponse() ICreateCampaignsResponse {
@@ -296,248 +276,229 @@ func (r *CreateCampaignsResponseV3) getVersion() int {
 
 // region UpdateV3
 type UpdateCampaignsRequestV3Data struct {
-	SiteRestrictions  []string `json:"siteRestrictions"`
-	PortfolioID       string   `json:"portfolioId"`
-	OffAmazonSettings struct {
-		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-	} `json:"offAmazonSettings"`
-	EndDate        string `json:"endDate"`
-	CampaignID     string `json:"campaignId"`
-	Name           string `json:"name"`
-	TargetingType  string `json:"targetingType"`
-	State          string `json:"state"`
-	DynamicBidding struct {
-		ShopperCohortBidding []struct {
-			ShopperCohortType string `json:"shopperCohortType"`
-			Percentage        int    `json:"percentage"`
-			AudienceSegments  []struct {
-				AudienceID          string `json:"audienceId"`
-				AudienceSegmentType string `json:"audienceSegmentType"`
-			} `json:"audienceSegments"`
-		} `json:"shopperCohortBidding"`
-		PlacementBidding []struct {
-			Percentage int    `json:"percentage"`
-			Placement  string `json:"placement"`
-		} `json:"placementBidding"`
-		Strategy string `json:"strategy"`
-	} `json:"dynamicBidding"`
-	StartDate string `json:"startDate"`
-	Budget    struct {
-		BudgetType string  `json:"budgetType"`
-		Budget     float64 `json:"budget"`
-	} `json:"budget"`
-	Tags map[string]string `json:"tags"`
+	SiteRestrictions  []string                `json:"siteRestrictions,omitempty"`
+	PortfolioID       string                  `json:"portfolioId,omitempty"`
+	OffAmazonSettings *OffAmazonSettingFilter `json:"offAmazonSettings,omitempty"`
+	EndDate           string                  `json:"endDate,omitempty"`
+	CampaignID        string                  `json:"campaignId,omitempty"`
+	Name              string                  `json:"name,omitempty"`
+	TargetingType     string                  `json:"targetingType,omitempty"`
+	State             string                  `json:"state,omitempty"`
+	DynamicBidding    *DynamicBiddingFilter   `json:"dynamicBidding,omitempty"`
+	StartDate         string                  `json:"startDate,omitempty"`
+	Budget            *BudgetFilter           `json:"budget,omitempty"`
+	Tags              map[string]string       `json:"tags,omitempty"`
 }
 type UpdateCampaignsRequestV3 struct {
-	Campaigns []UpdateCampaignsRequestV3Data `json:"campaigns"`
+	Campaigns []UpdateCampaignsRequestV3Data `json:"campaigns,omitempty"`
 }
 type UpdateCampaignsResponseV3Success struct {
-	CampaignID string `json:"campaignId"`
-	Index      int    `json:"index"`
+	CampaignID string `json:"campaignId,omitempty"`
+	Index      int    `json:"index,omitempty"`
 	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions"`
+		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
 		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-		} `json:"offAmazonSettings"`
-		EndDate        string `json:"endDate"`
-		CampaignID     string `json:"campaignId"`
+			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
+		} `json:"offAmazonSettings,omitempty"`
+		EndDate        string `json:"endDate,omitempty"`
+		CampaignID     string `json:"campaignId,omitempty"`
 		DynamicBidding struct {
 			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType"`
-				Percentage        int    `json:"percentage"`
+				ShopperCohortType string `json:"shopperCohortType,omitempty"`
+				Percentage        int    `json:"percentage,omitempty"`
 				AudienceSegments  []struct {
-				} `json:"audienceSegments"`
-			} `json:"shopperCohortBidding"`
+				} `json:"audienceSegments,omitempty"`
+			} `json:"shopperCohortBidding,omitempty"`
 			PlacementBidding []struct {
-				Percentage int    `json:"percentage"`
-				Placement  string `json:"placement"`
-			} `json:"placementBidding"`
-			Strategy string `json:"strategy"`
-		} `json:"dynamicBidding"`
-		Tags          map[string]string `json:"tags"`
-		PortfolioID   string            `json:"portfolioId"`
-		Name          string            `json:"name"`
-		TargetingType string            `json:"targetingType"`
-		State         string            `json:"state"`
-		StartDate     string            `json:"startDate"`
+				Percentage int    `json:"percentage,omitempty"`
+				Placement  string `json:"placement,omitempty"`
+			} `json:"placementBidding,omitempty"`
+			Strategy string `json:"strategy,omitempty"`
+		} `json:"dynamicBidding,omitempty"`
+		Tags          map[string]string `json:"tags,omitempty"`
+		PortfolioID   string            `json:"portfolioId,omitempty"`
+		Name          string            `json:"name,omitempty"`
+		TargetingType string            `json:"targetingType,omitempty"`
+		State         string            `json:"state,omitempty"`
+		StartDate     string            `json:"startDate,omitempty"`
 		Budget        struct {
-			BudgetType      string  `json:"budgetType"`
-			Budget          float64 `json:"budget"`
-			EffectiveBudget float64 `json:"effectiveBudget"`
-		} `json:"budget"`
+			BudgetType      string  `json:"budgetType,omitempty"`
+			Budget          float64 `json:"budget,omitempty"`
+			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
+		} `json:"budget,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"campaign"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"campaign,omitempty"`
 }
 type UpdateCampaignsResponseV3 struct {
 	Campaigns struct {
-		Success []UpdateCampaignsResponseV3Success `json:"success"`
+		Success []UpdateCampaignsResponseV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					DateError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"dateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"dateError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BudgetError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"budgetError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"budgetError,omitempty"`
 					CurrencyError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"currencyError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"currencyError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"campaigns"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"campaigns,omitempty"`
 }
 
 func (r *UpdateCampaignsRequestV3) getNewResponse() IUpdateCampaignsResponse {
@@ -556,217 +517,215 @@ func (r *UpdateCampaignsResponseV3) getVersion() int {
 
 // region DeleteV3
 type DeleteCampaignsRequestV3 struct {
-	CampaignIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"campaignIdFilter"`
+	CampaignIDFilter *IDFilter `json:"campaignIdFilter,omitempty"`
 }
 type DeleteCampaignsResponseV3Success struct {
-	CampaignID string `json:"campaignId"`
-	Index      int    `json:"index"`
+	CampaignID string `json:"campaignId,omitempty"`
+	Index      int    `json:"index,omitempty"`
 	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions"`
+		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
 		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-		} `json:"offAmazonSettings"`
-		EndDate        string `json:"endDate"`
-		CampaignID     string `json:"campaignId"`
+			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
+		} `json:"offAmazonSettings,omitempty"`
+		EndDate        string `json:"endDate,omitempty"`
+		CampaignID     string `json:"campaignId,omitempty"`
 		DynamicBidding struct {
 			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType"`
-				Percentage        int    `json:"percentage"`
+				ShopperCohortType string `json:"shopperCohortType,omitempty"`
+				Percentage        int    `json:"percentage,omitempty"`
 				AudienceSegments  []struct {
-				} `json:"audienceSegments"`
-			} `json:"shopperCohortBidding"`
+				} `json:"audienceSegments,omitempty"`
+			} `json:"shopperCohortBidding,omitempty"`
 			PlacementBidding []struct {
-				Percentage int    `json:"percentage"`
-				Placement  string `json:"placement"`
-			} `json:"placementBidding"`
-			Strategy string `json:"strategy"`
-		} `json:"dynamicBidding"`
-		Tags          map[string]string `json:"tags"`
-		PortfolioID   string            `json:"portfolioId"`
-		Name          string            `json:"name"`
-		TargetingType string            `json:"targetingType"`
-		State         string            `json:"state"`
-		StartDate     string            `json:"startDate"`
+				Percentage int    `json:"percentage,omitempty"`
+				Placement  string `json:"placement,omitempty"`
+			} `json:"placementBidding,omitempty"`
+			Strategy string `json:"strategy,omitempty"`
+		} `json:"dynamicBidding,omitempty"`
+		Tags          map[string]string `json:"tags,omitempty"`
+		PortfolioID   string            `json:"portfolioId,omitempty"`
+		Name          string            `json:"name,omitempty"`
+		TargetingType string            `json:"targetingType,omitempty"`
+		State         string            `json:"state,omitempty"`
+		StartDate     string            `json:"startDate,omitempty"`
 		Budget        struct {
-			BudgetType      string  `json:"budgetType"`
-			Budget          float64 `json:"budget"`
-			EffectiveBudget float64 `json:"effectiveBudget"`
-		} `json:"budget"`
+			BudgetType      string  `json:"budgetType,omitempty"`
+			Budget          float64 `json:"budget,omitempty"`
+			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
+		} `json:"budget,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"campaign"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"campaign,omitempty"`
 }
 type DeleteCampaignsResponseV3 struct {
 	Campaigns struct {
-		Success []DeleteCampaignsResponseV3Success `json:"success"`
+		Success []DeleteCampaignsResponseV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					DateError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"dateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"dateError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BudgetError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"budgetError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"budgetError,omitempty"`
 					CurrencyError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"currencyError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"currencyError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"campaigns"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"campaigns,omitempty"`
 }
 
 func (r *DeleteCampaignsRequestV3) getNewResponse() IDeleteCampaignsResponse {
@@ -785,71 +744,62 @@ func (r *DeleteCampaignsResponseV3) getVersion() int {
 
 // region ListV3
 type ListCampaignsRequestV3 struct {
-	CampaignIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"campaignIdFilter"`
-	PortfolioIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"portfolioIdFilter"`
-	StateFilter struct {
-		Include []string `json:"include"`
-	} `json:"stateFilter"`
-	MaxResults                int    `json:"maxResults"`
-	NextToken                 string `json:"nextToken"`
-	IncludeExtendedDataFields bool   `json:"includeExtendedDataFields"`
-	NameFilter                struct {
-		QueryTermMatchType string   `json:"queryTermMatchType"`
-		Include            []string `json:"include"`
-	} `json:"nameFilter"`
+	CampaignIDFilter          *IDFilter   `json:"campaignIdFilter,omitempty"`
+	PortfolioIDFilter         *IDFilter   `json:"portfolioIdFilter,omitempty"`
+	StateFilter               *IDFilter   `json:"stateFilter,omitempty"`
+	MaxResults                int         `json:"maxResults,omitempty"`
+	NextToken                 string      `json:"nextToken,omitempty"`
+	IncludeExtendedDataFields bool        `json:"includeExtendedDataFields,omitempty"`
+	NameFilter                *NameFilter `json:"nameFilter,omitempty"`
 }
 type ListCampaignsResponseV3Campaign struct {
-	SiteRestrictions  []string `json:"siteRestrictions"`
+	SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
 	OffAmazonSettings struct {
-		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy"`
-	} `json:"offAmazonSettings"`
-	EndDate        string `json:"endDate"`
-	CampaignID     string `json:"campaignId"`
+		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
+	} `json:"offAmazonSettings,omitempty"`
+	EndDate        string `json:"endDate,omitempty"`
+	CampaignID     string `json:"campaignId,omitempty"`
 	DynamicBidding struct {
 		ShopperCohortBidding []struct {
-			ShopperCohortType string `json:"shopperCohortType"`
-			Percentage        int    `json:"percentage"`
+			ShopperCohortType string `json:"shopperCohortType,omitempty"`
+			Percentage        int    `json:"percentage,omitempty"`
 			AudienceSegments  []struct {
-				AudienceID          string `json:"audienceId"`
-				AudienceSegmentType string `json:"audienceSegmentType"`
-			} `json:"audienceSegments"`
-		} `json:"shopperCohortBidding"`
+				AudienceID          string `json:"audienceId,omitempty"`
+				AudienceSegmentType string `json:"audienceSegmentType,omitempty"`
+			} `json:"audienceSegments,omitempty"`
+		} `json:"shopperCohortBidding,omitempty"`
 		PlacementBidding []struct {
-			Percentage int    `json:"percentage"`
-			Placement  string `json:"placement"`
-		} `json:"placementBidding"`
-		Strategy string `json:"strategy"`
-	} `json:"dynamicBidding"`
-	Tags          map[string]string `json:"tags"`
-	PortfolioID   string            `json:"portfolioId"`
-	Name          string            `json:"name"`
-	TargetingType string            `json:"targetingType"`
-	State         string            `json:"state"`
-	StartDate     string            `json:"startDate"`
+			Percentage int    `json:"percentage,omitempty"`
+			Placement  string `json:"placement,omitempty"`
+		} `json:"placementBidding,omitempty"`
+		Strategy string `json:"strategy,omitempty"`
+	} `json:"dynamicBidding,omitempty"`
+	Tags          map[string]string `json:"tags,omitempty"`
+	PortfolioID   string            `json:"portfolioId,omitempty"`
+	Name          string            `json:"name,omitempty"`
+	TargetingType string            `json:"targetingType,omitempty"`
+	State         string            `json:"state,omitempty"`
+	StartDate     string            `json:"startDate,omitempty"`
 	Budget        struct {
-		BudgetType      string  `json:"budgetType"`
-		Budget          float64 `json:"budget"`
-		EffectiveBudget float64 `json:"effectiveBudget"`
-	} `json:"budget"`
+		BudgetType      string  `json:"budgetType,omitempty"`
+		Budget          float64 `json:"budget,omitempty"`
+		EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
+	} `json:"budget,omitempty"`
 	ExtendedData struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-		ServingStatus        string    `json:"servingStatus"`
+		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+		ServingStatus        string    `json:"servingStatus,omitempty"`
 		ServingStatusDetails []struct {
-			Name    string `json:"name"`
-			HelpURL string `json:"helpUrl"`
-			Message string `json:"message"`
-		} `json:"servingStatusDetails"`
-		CreationDateTime time.Time `json:"creationDateTime"`
-	} `json:"extendedData"`
+			Name    string `json:"name,omitempty"`
+			HelpURL string `json:"helpUrl,omitempty"`
+			Message string `json:"message,omitempty"`
+		} `json:"servingStatusDetails,omitempty"`
+		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+	} `json:"extendedData,omitempty"`
 }
 type ListCampaignsResponseV3 struct {
-	TotalResults int                               `json:"totalResults"`
-	Campaigns    []ListCampaignsResponseV3Campaign `json:"campaigns"`
-	NextToken    string                            `json:"nextToken"`
+	TotalResults int                               `json:"totalResults,omitempty"`
+	Campaigns    []ListCampaignsResponseV3Campaign `json:"campaigns,omitempty"`
+	NextToken    string                            `json:"nextToken,omitempty"`
 }
 
 func (r *ListCampaignsRequestV3) getNewResponse() IListCampaignsResponse {

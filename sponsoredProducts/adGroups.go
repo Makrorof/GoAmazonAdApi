@@ -36,178 +36,178 @@ type IUpdateAdGroupsResponse interface {
 
 // region CreateV3
 type CreateAdGroupsRequestV3Data struct {
-	CampaignID string  `json:"campaignId"`
-	Name       string  `json:"name"`
-	State      string  `json:"state"`
-	DefaultBid float64 `json:"defaultBid"`
+	CampaignID string  `json:"campaignId,omitempty"`
+	Name       string  `json:"name,omitempty"`
+	State      string  `json:"state,omitempty"`
+	DefaultBid float64 `json:"defaultBid,omitempty"`
 }
 type CreateAdGroupsRequestV3 struct {
-	AdGroups []CreateAdGroupsRequestV3Data `json:"adGroups"`
+	AdGroups []CreateAdGroupsRequestV3Data `json:"adGroups,omitempty"`
 }
 type CreateAdGroupsResponseV3Success struct {
 	AdGroup struct {
-		CampaignID   string  `json:"campaignId"`
-		Name         string  `json:"name"`
-		State        string  `json:"state"`
-		AdGroupID    string  `json:"adGroupId"`
-		DefaultBid   float64 `json:"defaultBid"`
+		CampaignID   string  `json:"campaignId,omitempty"`
+		Name         string  `json:"name,omitempty"`
+		State        string  `json:"state,omitempty"`
+		AdGroupID    string  `json:"adGroupId,omitempty"`
+		DefaultBid   float64 `json:"defaultBid,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"adGroup"`
-	Index     int    `json:"index"`
-	AdGroupID string `json:"adGroupId"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"adGroup,omitempty"`
+	Index     int    `json:"index,omitempty"`
+	AdGroupID string `json:"adGroupId,omitempty"`
 }
 type CreateAdGroupsResponseV3 struct {
 	AdGroups struct {
-		Success []CreateAdGroupsResponseV3Success `json:"success"`
+		Success []CreateAdGroupsResponseV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					ApplicableMarketplacesError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"applicableMarketplacesError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"applicableMarketplacesError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"adGroups"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"adGroups,omitempty"`
 }
 
 func (r *CreateAdGroupsRequestV3) getNewResponse() ICreateAdGroupsResponse {
@@ -226,178 +226,178 @@ func (r *CreateAdGroupsResponseV3) getVersion() int {
 
 // region UpdateV3
 type UpdateAdGroupsRequestV3Data struct {
-	Name       string  `json:"name"`
-	State      string  `json:"state"`
-	AdGroupID  string  `json:"adGroupId"`
-	DefaultBid float64 `json:"defaultBid"`
+	Name       string  `json:"name,omitempty"`
+	State      string  `json:"state,omitempty"`
+	AdGroupID  string  `json:"adGroupId,omitempty"`
+	DefaultBid float64 `json:"defaultBid,omitempty"`
 }
 type UpdateAdGroupsRequestV3 struct {
-	AdGroups []UpdateAdGroupsRequestV3Data `json:"adGroups"`
+	AdGroups []UpdateAdGroupsRequestV3Data `json:"adGroups,omitempty"`
 }
 type UpdateAdGroupsResponseV3Success struct {
 	AdGroup struct {
-		CampaignID   string  `json:"campaignId"`
-		Name         string  `json:"name"`
-		State        string  `json:"state"`
-		AdGroupID    string  `json:"adGroupId"`
-		DefaultBid   float64 `json:"defaultBid"`
+		CampaignID   string  `json:"campaignId,omitempty"`
+		Name         string  `json:"name,omitempty"`
+		State        string  `json:"state,omitempty"`
+		AdGroupID    string  `json:"adGroupId,omitempty"`
+		DefaultBid   float64 `json:"defaultBid,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"adGroup"`
-	Index     int    `json:"index"`
-	AdGroupID string `json:"adGroupId"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"adGroup,omitempty"`
+	Index     int    `json:"index,omitempty"`
+	AdGroupID string `json:"adGroupId,omitempty"`
 }
 type UpdateAdGroupsResponseV3 struct {
 	AdGroups struct {
-		Success []UpdateAdGroupsResponseV3Success `json:"success"`
+		Success []UpdateAdGroupsResponseV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					ApplicableMarketplacesError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"applicableMarketplacesError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"applicableMarketplacesError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"adGroups"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"adGroups,omitempty"`
 }
 
 func (r *UpdateAdGroupsRequestV3) getNewResponse() IUpdateAdGroupsResponse {
@@ -416,174 +416,172 @@ func (r *UpdateAdGroupsResponseV3) getVersion() int {
 
 // region DeleteV3
 type DeleteAdGroupsRequestV3 struct {
-	AdGroupIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"adGroupIdFilter"`
+	AdGroupIDFilter *IDFilter `json:"adGroupIdFilter,omitempty"`
 }
 type DeleteAdGroupsResponseV3Success struct {
 	AdGroup struct {
-		CampaignID   string  `json:"campaignId"`
-		Name         string  `json:"name"`
-		State        string  `json:"state"`
-		AdGroupID    string  `json:"adGroupId"`
-		DefaultBid   float64 `json:"defaultBid"`
+		CampaignID   string  `json:"campaignId,omitempty"`
+		Name         string  `json:"name,omitempty"`
+		State        string  `json:"state,omitempty"`
+		AdGroupID    string  `json:"adGroupId,omitempty"`
+		DefaultBid   float64 `json:"defaultBid,omitempty"`
 		ExtendedData struct {
-			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-			ServingStatus        string    `json:"servingStatus"`
+			LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+			ServingStatus        string    `json:"servingStatus,omitempty"`
 			ServingStatusDetails []struct {
-				Name    string `json:"name"`
-				HelpURL string `json:"helpUrl"`
-				Message string `json:"message"`
-			} `json:"servingStatusDetails"`
-			CreationDateTime time.Time `json:"creationDateTime"`
-		} `json:"extendedData"`
-	} `json:"adGroup"`
-	Index     int    `json:"index"`
-	AdGroupID string `json:"adGroupId"`
+				Name    string `json:"name,omitempty"`
+				HelpURL string `json:"helpUrl,omitempty"`
+				Message string `json:"message,omitempty"`
+			} `json:"servingStatusDetails,omitempty"`
+			CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+		} `json:"extendedData,omitempty"`
+	} `json:"adGroup,omitempty"`
+	Index     int    `json:"index,omitempty"`
+	AdGroupID string `json:"adGroupId,omitempty"`
 }
 type DeleteAdGroupsResponseV3 struct {
 	AdGroups struct {
-		Success []DeleteAdGroupsResponseV3Success `json:"success"`
+		Success []DeleteAdGroupsResponseV3Success `json:"success,omitempty"`
 		Error   []struct {
-			Index  int `json:"index"`
+			Index  int `json:"index,omitempty"`
 			Errors []struct {
-				ErrorType  string `json:"errorType"`
+				ErrorType  string `json:"errorType,omitempty"`
 				ErrorValue struct {
 					EntityStateError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
-						EntityType  string `json:"entityType"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
+						EntityType  string `json:"entityType,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityStateError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityStateError,omitempty"`
 					MissingValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"missingValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"missingValueError,omitempty"`
 					BiddingError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"biddingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"biddingError,omitempty"`
 					DuplicateValueError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"duplicateValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"duplicateValueError,omitempty"`
 					RangeError *struct {
-						Reason      string   `json:"reason"`
-						Marketplace string   `json:"marketplace"`
-						Allowed     []string `json:"allowed"`
+						Reason      string   `json:"reason,omitempty"`
+						Marketplace string   `json:"marketplace,omitempty"`
+						Allowed     []string `json:"allowed,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						UpperLimit string `json:"upperLimit"`
-						LowerLimit string `json:"lowerLimit"`
-						Message    string `json:"message"`
-					} `json:"rangeError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						UpperLimit string `json:"upperLimit,omitempty"`
+						LowerLimit string `json:"lowerLimit,omitempty"`
+						Message    string `json:"message,omitempty"`
+					} `json:"rangeError,omitempty"`
 					OtherError *struct {
-						Reason      string `json:"reason"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"otherError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"otherError,omitempty"`
 					ParentEntityError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"parentEntityError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"parentEntityError,omitempty"`
 					ThrottledError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"throttledError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"throttledError,omitempty"`
 					EntityNotFoundError *struct {
-						Reason     string `json:"reason"`
-						EntityType string `json:"entityType"`
+						Reason     string `json:"reason,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						EntityID string `json:"entityId"`
-						Message  string `json:"message"`
-					} `json:"entityNotFoundError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						EntityID string `json:"entityId,omitempty"`
+						Message  string `json:"message,omitempty"`
+					} `json:"entityNotFoundError,omitempty"`
 					ApplicableMarketplacesError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"applicableMarketplacesError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"applicableMarketplacesError,omitempty"`
 					MalformedValueError *struct {
-						Reason      string `json:"reason"`
-						Fragment    string `json:"fragment"`
-						Marketplace string `json:"marketplace"`
+						Reason      string `json:"reason,omitempty"`
+						Fragment    string `json:"fragment,omitempty"`
+						Marketplace string `json:"marketplace,omitempty"`
 						Cause       struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"malformedValueError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"malformedValueError,omitempty"`
 					BillingError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"billingError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"billingError,omitempty"`
 					EntityQuotaError *struct {
-						Reason     string `json:"reason"`
-						QuotaScope string `json:"quotaScope"`
-						EntityType string `json:"entityType"`
-						Quota      string `json:"quota"`
+						Reason     string `json:"reason,omitempty"`
+						QuotaScope string `json:"quotaScope,omitempty"`
+						EntityType string `json:"entityType,omitempty"`
+						Quota      string `json:"quota,omitempty"`
 						Cause      struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"entityQuotaError"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"entityQuotaError,omitempty"`
 					InternalServerError *struct {
-						Reason string `json:"reason"`
+						Reason string `json:"reason,omitempty"`
 						Cause  struct {
-							Location string `json:"location"`
-							Trigger  string `json:"trigger"`
-						} `json:"cause"`
-						Message string `json:"message"`
-					} `json:"internalServerError"`
-				} `json:"errorValue"`
-			} `json:"errors"`
-		} `json:"error"`
-	} `json:"adGroups"`
+							Location string `json:"location,omitempty"`
+							Trigger  string `json:"trigger,omitempty"`
+						} `json:"cause,omitempty"`
+						Message string `json:"message,omitempty"`
+					} `json:"internalServerError,omitempty"`
+				} `json:"errorValue,omitempty"`
+			} `json:"errors,omitempty"`
+		} `json:"error,omitempty"`
+	} `json:"adGroups,omitempty"`
 }
 
 func (r *DeleteAdGroupsRequestV3) getNewResponse() IDeleteAdGroupsResponse {
@@ -602,45 +600,36 @@ func (r *DeleteAdGroupsResponseV3) getVersion() int {
 
 // region ListV3
 type ListAdGroupsRequestV3 struct {
-	CampaignIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"campaignIdFilter"`
-	StateFilter struct {
-		Include []string `json:"include"`
-	} `json:"stateFilter"`
-	MaxResults      int    `json:"maxResults"`
-	NextToken       string `json:"nextToken"`
-	AdGroupIDFilter struct {
-		Include []string `json:"include"`
-	} `json:"adGroupIdFilter"`
-	IncludeExtendedDataFields bool `json:"includeExtendedDataFields"`
-	NameFilter                struct {
-		QueryTermMatchType string   `json:"queryTermMatchType"`
-		Include            []string `json:"include"`
-	} `json:"nameFilter"`
-	CampaignTargetingTypeFilter string `json:"campaignTargetingTypeFilter"`
+	CampaignIDFilter            *IDFilter   `json:"campaignIdFilter,omitempty"`
+	StateFilter                 *IDFilter   `json:"stateFilter,omitempty"`
+	MaxResults                  int         `json:"maxResults,omitempty"`
+	NextToken                   string      `json:"nextToken,omitempty"`
+	AdGroupIDFilter             *IDFilter   `json:"adGroupIdFilter,omitempty"`
+	IncludeExtendedDataFields   bool        `json:"includeExtendedDataFields,omitempty"`
+	NameFilter                  *NameFilter `json:"nameFilter,omitempty"`
+	CampaignTargetingTypeFilter string      `json:"campaignTargetingTypeFilter,omitempty"`
 }
 type ListAdGroupsResponseV3Data struct {
-	CampaignID   string  `json:"campaignId"`
-	Name         string  `json:"name"`
-	State        string  `json:"state"`
-	AdGroupID    string  `json:"adGroupId"`
-	DefaultBid   float64 `json:"defaultBid"`
+	CampaignID   string  `json:"campaignId,omitempty"`
+	Name         string  `json:"name,omitempty"`
+	State        string  `json:"state,omitempty"`
+	AdGroupID    string  `json:"adGroupId,omitempty"`
+	DefaultBid   float64 `json:"defaultBid,omitempty"`
 	ExtendedData struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime"`
-		ServingStatus        string    `json:"servingStatus"`
+		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
+		ServingStatus        string    `json:"servingStatus,omitempty"`
 		ServingStatusDetails []struct {
-			Name    string `json:"name"`
-			HelpURL string `json:"helpUrl"`
-			Message string `json:"message"`
-		} `json:"servingStatusDetails"`
-		CreationDateTime time.Time `json:"creationDateTime"`
-	} `json:"extendedData"`
+			Name    string `json:"name,omitempty"`
+			HelpURL string `json:"helpUrl,omitempty"`
+			Message string `json:"message,omitempty"`
+		} `json:"servingStatusDetails,omitempty"`
+		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
+	} `json:"extendedData,omitempty"`
 }
 type ListAdGroupsResponseV3 struct {
-	TotalResults int                          `json:"totalResults"`
-	AdGroups     []ListAdGroupsResponseV3Data `json:"adGroups"`
-	NextToken    string                       `json:"nextToken"`
+	TotalResults int                          `json:"totalResults,omitempty"`
+	AdGroups     []ListAdGroupsResponseV3Data `json:"adGroups,omitempty"`
+	NextToken    string                       `json:"nextToken,omitempty"`
 }
 
 func (r *ListAdGroupsRequestV3) getNewResponse() IListAdGroupsResponse {

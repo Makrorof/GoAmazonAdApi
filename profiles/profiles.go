@@ -9,17 +9,17 @@ import (
 )
 
 type ProfileData struct {
-	ProfileID    int64  `json:"profileId"`
-	CountryCode  string `json:"countryCode"`
-	CurrencyCode string `json:"currencyCode"`
-	Timezone     string `json:"timezone"`
+	ProfileID    int64  `json:"profileId,omitempty"`
+	CountryCode  string `json:"countryCode,omitempty"`
+	CurrencyCode string `json:"currencyCode,omitempty"`
+	Timezone     string `json:"timezone,omitempty"`
 	AccountInfo  struct {
-		MarketplaceStringID string `json:"marketplaceStringId"`
-		ID                  string `json:"id"`
-		Type                string `json:"type"`
-		Name                string `json:"name"`
-		ValidPaymentMethod  bool   `json:"validPaymentMethod"`
-	} `json:"accountInfo"`
+		MarketplaceStringID string `json:"marketplaceStringId,omitempty"`
+		ID                  string `json:"id,omitempty"`
+		Type                string `json:"type,omitempty"`
+		Name                string `json:"name,omitempty"`
+		ValidPaymentMethod  bool   `json:"validPaymentMethod,omitempty"`
+	} `json:"accountInfo,omitempty"`
 }
 
 type Profiles struct {
