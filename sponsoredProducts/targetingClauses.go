@@ -36,28 +36,28 @@ type IUpdateTargetingClausesResponse interface {
 
 // region Listv3
 type ListTargetingClausesRequestV3 struct {
-	CampaignIDFilter struct {
+	CampaignIDFilter *struct {
 		Include []string `json:"include"`
-	} `json:"campaignIdFilter"`
-	StateFilter struct {
+	} `json:"campaignIdFilter,omitempty"`
+	StateFilter *struct {
 		Include []string `json:"include"`
-	} `json:"stateFilter"`
-	ExpressionTypeFilter struct {
+	} `json:"stateFilter,omitempty"`
+	ExpressionTypeFilter *struct {
 		Include []string `json:"include"`
-	} `json:"expressionTypeFilter"`
-	MaxResults     int    `json:"maxResults"`
-	NextToken      string `json:"nextToken"`
-	TargetIDFilter struct {
+	} `json:"expressionTypeFilter,omitempty"`
+	MaxResults     *int    `json:"maxResults,omitempty"`
+	NextToken      *string `json:"nextToken,omitempty"`
+	TargetIDFilter *struct {
 		Include []string `json:"include"`
-	} `json:"targetIdFilter"`
-	AsinFilter struct {
+	} `json:"targetIdFilter,omitempty"`
+	AsinFilter *struct {
 		QueryTermMatchType string   `json:"queryTermMatchType"`
 		Include            []string `json:"include"`
-	} `json:"asinFilter"`
-	AdGroupIDFilter struct {
+	} `json:"asinFilter,omitempty"`
+	AdGroupIDFilter *struct {
 		Include []string `json:"include"`
-	} `json:"adGroupIdFilter"`
-	IncludeExtendedDataFields bool `json:"includeExtendedDataFields"`
+	} `json:"adGroupIdFilter,omitempty"`
+	IncludeExtendedDataFields *bool `json:"includeExtendedDataFields,omitempty"`
 }
 type ListTargetingClausesData struct {
 	Expression []struct {
