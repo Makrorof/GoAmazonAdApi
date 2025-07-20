@@ -48,7 +48,7 @@ func (p *SponsoredProducts) GetKeywordsRecommendations(ctx context.Context, requ
 func (p *SponsoredProducts) ListKeywords(ctx context.Context, request IListKeywordsRequest) (IListKeywordsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/keywords/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/keywords/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -59,7 +59,7 @@ func (p *SponsoredProducts) ListKeywords(ctx context.Context, request IListKeywo
 func (p *SponsoredProducts) CreateKeywords(ctx context.Context, request ICreateKeywordsRequest) (ICreateKeywordsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -70,7 +70,7 @@ func (p *SponsoredProducts) CreateKeywords(ctx context.Context, request ICreateK
 func (p *SponsoredProducts) DeleteKeywords(ctx context.Context, request IDeleteKeywordsRequest) (IDeleteKeywordsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -81,7 +81,7 @@ func (p *SponsoredProducts) DeleteKeywords(ctx context.Context, request IDeleteK
 func (p *SponsoredProducts) UpdateKeywords(ctx context.Context, request IUpdateKeywordsRequest) (IUpdateKeywordsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.PUT(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.PUT(ctx, "/sp/keywords", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spKeyword.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -98,6 +98,7 @@ func (p *SponsoredProducts) CreateCampaigns(ctx context.Context, request ICreate
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -117,6 +118,7 @@ func (p *SponsoredProducts) UpdateCampaigns(ctx context.Context, request IUpdate
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -134,7 +136,7 @@ func (p *SponsoredProducts) UpdateCampaigns(ctx context.Context, request IUpdate
 func (p *SponsoredProducts) DeleteCampaigns(ctx context.Context, request IDeleteCampaignsRequest) (IDeleteCampaignsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/campaigns/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/campaigns/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -145,7 +147,7 @@ func (p *SponsoredProducts) DeleteCampaigns(ctx context.Context, request IDelete
 func (p *SponsoredProducts) ListCampaigns(ctx context.Context, request IListCampaignsRequest) (IListCampaignsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/campaigns/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/campaigns/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spCampaign.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -162,6 +164,7 @@ func (p *SponsoredProducts) CreateAdGroups(ctx context.Context, request ICreateA
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -181,6 +184,7 @@ func (p *SponsoredProducts) UpdateAdGroups(ctx context.Context, request IUpdateA
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -198,7 +202,7 @@ func (p *SponsoredProducts) UpdateAdGroups(ctx context.Context, request IUpdateA
 func (p *SponsoredProducts) DeleteAdGroups(ctx context.Context, request IDeleteAdGroupsRequest) (IDeleteAdGroupsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/adGroups/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/adGroups/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -209,7 +213,7 @@ func (p *SponsoredProducts) DeleteAdGroups(ctx context.Context, request IDeleteA
 func (p *SponsoredProducts) ListAdGroups(ctx context.Context, request IListAdGroupsRequest) (IListAdGroupsResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/adGroups/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/adGroups/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spAdGroup.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -226,6 +230,7 @@ func (p *SponsoredProducts) CreateTargetingClauses(ctx context.Context, request 
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -245,6 +250,7 @@ func (p *SponsoredProducts) UpdateTargetingClauses(ctx context.Context, request 
 
 	header := map[string][]string{
 		"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
+		"Accept":       {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())},
 	}
 
 	if returnRepresentation {
@@ -262,7 +268,7 @@ func (p *SponsoredProducts) UpdateTargetingClauses(ctx context.Context, request 
 func (p *SponsoredProducts) DeleteTargetingClauses(ctx context.Context, request IDeleteTargetingClausesRequest) (IDeleteTargetingClausesResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/targets/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/targets/delete", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
@@ -273,7 +279,7 @@ func (p *SponsoredProducts) DeleteTargetingClauses(ctx context.Context, request 
 func (p *SponsoredProducts) ListTargetingClauses(ctx context.Context, request IListTargetingClausesRequest) (IListTargetingClausesResponse, error) {
 	response := request.getNewResponse()
 
-	if err := p.requestClient.POST(ctx, "/sp/targets/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
+	if err := p.requestClient.POST(ctx, "/sp/targets/list", map[string][]string{"Content-Type": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}, "Accept": {fmt.Sprintf("application/vnd.spTargetingClause.v%d+json", request.getVersion())}}, request, response); err != nil {
 		return response, err
 	}
 
