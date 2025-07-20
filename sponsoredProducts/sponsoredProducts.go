@@ -14,7 +14,7 @@ type SponsoredProducts struct {
 	requestClient *auth.RequestClient
 }
 
-func NewV3(c *auth.Client, endpoint auth.AMAZON_ENDPOINT) *SponsoredProducts {
+func New(c *auth.Client, endpoint auth.AMAZON_ENDPOINT) *SponsoredProducts {
 	return &SponsoredProducts{
 		requestClient: auth.NewRequestClient(c, endpoint, GoAmazonAdApi.API_ERROR_MAX_RETRY, GoAmazonAdApi.API_ERROR_RETRY_DELAY),
 	}

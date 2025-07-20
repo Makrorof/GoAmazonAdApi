@@ -21,6 +21,8 @@ type Client struct {
 	clientSecret string
 	tokenSource  oauth2.TokenSource
 
+	profileId string
+
 	//PUBLIC
 	UserAgent string
 }
@@ -136,6 +138,13 @@ func (c *Client) WithCode(ctx context.Context, code string, redirectURL string, 
 	}
 
 	return c.WithTokenSource(ctx, config.TokenSource(ctx, token)), nil
+}
+
+func (c *Client) SetProfileId(ctx context.Context, profileId string) *Client {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.profileId = profileId
+	return c
 }
 
 func (c *Client) updateToken() error {

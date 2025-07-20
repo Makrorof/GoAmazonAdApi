@@ -53,6 +53,9 @@ func (c *RequestClient) request(ctx context.Context, method string, apiPath stri
 			"Amazon-Advertising-API-ClientId": {c.client.clientId},
 			"User-Agent":                      {c.client.UserAgent},
 		}
+		if len(c.client.profileId) > 0 {
+			h["Amazon-Advertising-API-Scope"] = []string{c.client.profileId}
+		}
 
 		for k, v := range header {
 			h[k] = v
