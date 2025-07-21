@@ -1,7 +1,5 @@
 package sponsoredProducts
 
-import "time"
-
 type IListTargetingClausesRequest interface {
 	getNewResponse() IListTargetingClausesResponse
 	getVersion() int
@@ -34,6 +32,18 @@ type IUpdateTargetingClausesResponse interface {
 	getVersion() int
 }
 
+type TargetingClauseV3 struct {
+	Expression         []TypeValue   `json:"expression,omitempty"`
+	TargetID           string        `json:"targetId,omitempty"`
+	ResolvedExpression []TypeValue   `json:"resolvedExpression,omitempty"`
+	CampaignID         string        `json:"campaignId,omitempty"`
+	ExpressionType     string        `json:"expressionType,omitempty"`
+	State              string        `json:"state,omitempty"`
+	Bid                *float64      `json:"bid,omitempty"`
+	AdGroupID          string        `json:"adGroupId,omitempty"`
+	ExtendedData       *ExtendedData `json:"extendedData,omitempty"`
+}
+
 // region Listv3
 type ListTargetingClausesRequestV3 struct {
 	CampaignIDFilter          *IDFilter   `json:"campaignIdFilter,omitempty"`
@@ -56,21 +66,12 @@ type ListTargetingClausesData struct {
 		Type  string `json:"type,omitempty"`
 		Value string `json:"value,omitempty"`
 	} `json:"resolvedExpression,omitempty"`
-	CampaignID     string   `json:"campaignId,omitempty"`
-	ExpressionType string   `json:"expressionType,omitempty"`
-	State          string   `json:"state,omitempty"`
-	Bid            *float64 `json:"bid,omitempty"`
-	AdGroupID      string   `json:"adGroupId,omitempty"`
-	ExtendedData   struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-		ServingStatus        string    `json:"servingStatus,omitempty"`
-		ServingStatusDetails []struct {
-			Name    string `json:"name,omitempty"`
-			HelpURL string `json:"helpUrl,omitempty"`
-			Message string `json:"message,omitempty"`
-		} `json:"servingStatusDetails,omitempty"`
-		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-	} `json:"extendedData,omitempty"`
+	CampaignID     string        `json:"campaignId,omitempty"`
+	ExpressionType string        `json:"expressionType,omitempty"`
+	State          string        `json:"state,omitempty"`
+	Bid            *float64      `json:"bid,omitempty"`
+	AdGroupID      string        `json:"adGroupId,omitempty"`
+	ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
 }
 type ListTargetingClausesResponseV3 struct {
 	TotalResults     int                        `json:"totalResults,omitempty"`
@@ -93,36 +94,20 @@ func (r *ListTargetingClausesResponseV3) getVersion() int {
 
 // region CreateV3
 type CreateTargetingClausesData struct {
-	Expression     []TypeValueFilter `json:"expression,omitempty"`
-	CampaignID     string            `json:"campaignId,omitempty"`
-	ExpressionType string            `json:"expressionType,omitempty"`
-	State          string            `json:"state,omitempty"`
-	Bid            *float64          `json:"bid,omitempty"`
-	AdGroupID      string            `json:"adGroupId,omitempty"`
+	Expression     []TypeValue `json:"expression,omitempty"`
+	CampaignID     string      `json:"campaignId,omitempty"`
+	ExpressionType string      `json:"expressionType,omitempty"`
+	State          string      `json:"state,omitempty"`
+	Bid            *float64    `json:"bid,omitempty"`
+	AdGroupID      string      `json:"adGroupId,omitempty"`
 }
 type CreateTargetingClausesRequestV3 struct {
 	TargetingClauses []CreateTargetingClausesData `json:"targetingClauses,omitempty"`
 }
 type CreateTargetingClausesSuccess struct {
-	TargetingClause struct {
-		Expression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"expression,omitempty"`
-		TargetID           string `json:"targetId,omitempty"`
-		ResolvedExpression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string        `json:"campaignId,omitempty"`
-		ExpressionType string        `json:"expressionType,omitempty"`
-		State          string        `json:"state,omitempty"`
-		Bid            *float64      `json:"bid,omitempty"`
-		AdGroupID      string        `json:"adGroupId,omitempty"`
-		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"targetingClause,omitempty"`
-	TargetID string `json:"targetId,omitempty"`
-	Index    int    `json:"index,omitempty"`
+	TargetingClause *TargetingClauseV3 `json:"targetingClause,omitempty"`
+	TargetID        string             `json:"targetId,omitempty"`
+	Index           int                `json:"index,omitempty"`
 }
 type CreateTargetingClausesResponseV3 struct {
 	TargetingClauses struct {
@@ -149,25 +134,9 @@ type DeleteTargetingClausesRequestV3 struct {
 	TargetIDFilter *IDFilter `json:"targetIdFilter,omitempty"`
 }
 type DeleteTargetingClausesSuccess struct {
-	TargetingClause struct {
-		Expression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"expression,omitempty"`
-		TargetID           string `json:"targetId,omitempty"`
-		ResolvedExpression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string        `json:"campaignId,omitempty"`
-		ExpressionType string        `json:"expressionType,omitempty"`
-		State          string        `json:"state,omitempty"`
-		Bid            *float64      `json:"bid,omitempty"`
-		AdGroupID      string        `json:"adGroupId,omitempty"`
-		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"targetingClause,omitempty"`
-	TargetID string `json:"targetId,omitempty"`
-	Index    int    `json:"index,omitempty"`
+	TargetingClause *TargetingClauseV3 `json:"targetingClause,omitempty"`
+	TargetID        string             `json:"targetId,omitempty"`
+	Index           int                `json:"index,omitempty"`
 }
 type DeleteTargetingClausesResponseV3 struct {
 	TargetingClauses struct {
@@ -191,35 +160,19 @@ func (r *DeleteTargetingClausesResponseV3) getVersion() int {
 
 // region UpdateV3
 type UpdateTargetingClausesData struct {
-	Expression     []TypeValueFilter `json:"expression,omitempty"`
-	TargetID       string            `json:"targetId,omitempty"`
-	ExpressionType string            `json:"expressionType,omitempty"`
-	State          string            `json:"state,omitempty"`
-	Bid            *float64          `json:"bid,omitempty"`
+	Expression     []TypeValue `json:"expression,omitempty"`
+	TargetID       string      `json:"targetId,omitempty"`
+	ExpressionType string      `json:"expressionType,omitempty"`
+	State          string      `json:"state,omitempty"`
+	Bid            *float64    `json:"bid,omitempty"`
 }
 type UpdateTargetingClausesRequestV3 struct {
 	TargetingClauses []UpdateTargetingClausesData `json:"targetingClauses,omitempty"`
 }
 type UpdateTargetingClausesSuccess struct {
-	TargetingClause struct {
-		Expression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"expression,omitempty"`
-		TargetID           string `json:"targetId,omitempty"`
-		ResolvedExpression []struct {
-			Type  string `json:"type,omitempty"`
-			Value string `json:"value,omitempty"`
-		} `json:"resolvedExpression,omitempty"`
-		CampaignID     string        `json:"campaignId,omitempty"`
-		ExpressionType string        `json:"expressionType,omitempty"`
-		State          string        `json:"state,omitempty"`
-		Bid            *float64      `json:"bid,omitempty"`
-		AdGroupID      string        `json:"adGroupId,omitempty"`
-		ExtendedData   *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"targetingClause,omitempty"`
-	TargetID string `json:"targetId,omitempty"`
-	Index    int    `json:"index,omitempty"`
+	TargetingClause *TargetingClauseV3 `json:"targetingClause,omitempty"`
+	TargetID        string             `json:"targetId,omitempty"`
+	Index           int                `json:"index,omitempty"`
 }
 type UpdateTargetingClausesResponseV3 struct {
 	TargetingClauses struct {

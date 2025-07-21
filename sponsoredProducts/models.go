@@ -24,7 +24,7 @@ type NameFilter struct {
 	Include            []string `json:"include,omitempty"`
 }
 
-type TypeValueFilter struct {
+type TypeValue struct {
 	Type  string `json:"type,omitempty"`
 	Value string `json:"value,omitempty"`
 }

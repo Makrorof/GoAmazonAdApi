@@ -1,7 +1,5 @@
 package sponsoredProducts
 
-import "time"
-
 type IListAdGroupsRequest interface {
 	getNewResponse() IListAdGroupsResponse
 	getVersion() int
@@ -169,21 +167,12 @@ type ListAdGroupsRequestV3 struct {
 	CampaignTargetingTypeFilter string      `json:"campaignTargetingTypeFilter,omitempty"`
 }
 type ListAdGroupsResponseV3Data struct {
-	CampaignID   string  `json:"campaignId,omitempty"`
-	Name         string  `json:"name,omitempty"`
-	State        string  `json:"state,omitempty"`
-	AdGroupID    string  `json:"adGroupId,omitempty"`
-	DefaultBid   float64 `json:"defaultBid,omitempty"`
-	ExtendedData *struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-		ServingStatus        string    `json:"servingStatus,omitempty"`
-		ServingStatusDetails []struct {
-			Name    string `json:"name,omitempty"`
-			HelpURL string `json:"helpUrl,omitempty"`
-			Message string `json:"message,omitempty"`
-		} `json:"servingStatusDetails,omitempty"`
-		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-	} `json:"extendedData,omitempty"`
+	CampaignID   string        `json:"campaignId,omitempty"`
+	Name         string        `json:"name,omitempty"`
+	State        string        `json:"state,omitempty"`
+	AdGroupID    string        `json:"adGroupId,omitempty"`
+	DefaultBid   float64       `json:"defaultBid,omitempty"`
+	ExtendedData *ExtendedData `json:"extendedData,omitempty"`
 }
 type ListAdGroupsResponseV3 struct {
 	TotalResults int                          `json:"totalResults,omitempty"`

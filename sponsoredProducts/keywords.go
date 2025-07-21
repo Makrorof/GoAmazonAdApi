@@ -1,7 +1,5 @@
 package sponsoredProducts
 
-import "time"
-
 type IListKeywordsRequest interface {
 	getNewResponse() IListKeywordsResponse
 	getVersion() int
@@ -35,31 +33,28 @@ type IUpdateKeywordsResponse interface {
 }
 
 type KeywordsDataV3 struct {
-	KeywordID             string  `json:"keywordId,omitempty"`
-	NativeLanguageKeyword string  `json:"nativeLanguageKeyword,omitempty"`
-	NativeLanguageLocale  string  `json:"nativeLanguageLocale,omitempty"`
-	CampaignID            string  `json:"campaignId,omitempty"`
-	MatchType             string  `json:"matchType,omitempty"`
-	State                 string  `json:"state,omitempty"`
-	Bid                   float64 `json:"bid,omitempty"`
-	AdGroupID             string  `json:"adGroupId,omitempty"`
-	KeywordText           string  `json:"keywordText,omitempty"`
-	ExtendedData          struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-		ServingStatus        string    `json:"servingStatus,omitempty"`
-		ServingStatusDetails []struct {
-			Name    string `json:"name,omitempty"`
-			HelpURL string `json:"helpUrl,omitempty"`
-			Message string `json:"message,omitempty"`
-		} `json:"servingStatusDetails,omitempty"`
-		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-	} `json:"extendedData,omitempty"`
+	KeywordID             string        `json:"keywordId,omitempty"`
+	NativeLanguageKeyword string        `json:"nativeLanguageKeyword,omitempty"`
+	NativeLanguageLocale  string        `json:"nativeLanguageLocale,omitempty"`
+	CampaignID            string        `json:"campaignId,omitempty"`
+	MatchType             string        `json:"matchType,omitempty"`
+	State                 string        `json:"state,omitempty"`
+	Bid                   float64       `json:"bid,omitempty"`
+	AdGroupID             string        `json:"adGroupId,omitempty"`
+	KeywordText           string        `json:"keywordText,omitempty"`
+	ExtendedData          *ExtendedData `json:"extendedData,omitempty"`
 }
 
 type UpdateKeywordDataV3 struct {
 	KeywordID string  `json:"keywordId,omitempty"`
 	State     string  `json:"state,omitempty"`
 	Bid       float64 `json:"bid,omitempty"`
+}
+
+type KeywordsSuccessV3 struct {
+	KeywordID string         `json:"keywordId,omitempty"`
+	Index     int            `json:"index,omitempty"`
+	Keyword   KeywordsDataV3 `json:"keyword,omitempty"`
 }
 
 // region Listv3
@@ -105,11 +100,7 @@ type CreateKeywordsV3 struct {
 	AdGroupID             string  `json:"adGroupId,omitempty"`
 	KeywordText           string  `json:"keywordText,omitempty"`
 }
-type CreateKeywordsSuccessV3 struct {
-	KeywordID string         `json:"keywordId,omitempty"`
-	Index     int            `json:"index,omitempty"`
-	Keyword   KeywordsDataV3 `json:"keyword,omitempty"`
-}
+
 type CreateKeywordsErrorV3 struct {
 	ErrorType  string      `json:"errorType,omitempty"`
 	ErrorValue *ErrorValue `json:"errorValue,omitempty"`
@@ -123,8 +114,8 @@ type CreateKeywordsRequestV3 struct {
 }
 type CreateKeywordsResponseV3 struct {
 	Keywords struct {
-		Success []CreateKeywordsSuccessV3 `json:"success,omitempty"`
-		Error   []CreateKeywordsErrorV3   `json:"error,omitempty"`
+		Success []KeywordsSuccessV3     `json:"success,omitempty"`
+		Error   []CreateKeywordsErrorV3 `json:"error,omitempty"`
 	} `json:"keywords,omitempty"`
 }
 
@@ -147,12 +138,8 @@ type DeleteKeywordsRequestV3 struct {
 }
 type DeleteKeywordsResponseV3 struct {
 	Keywords struct {
-		Success []struct {
-			KeywordID string         `json:"keywordId,omitempty"`
-			Index     int            `json:"index,omitempty"`
-			Keyword   KeywordsDataV3 `json:"keyword,omitempty"`
-		} `json:"success,omitempty"`
-		Error []Error `json:"error,omitempty"`
+		Success []KeywordsSuccessV3 `json:"success,omitempty"`
+		Error   []Error             `json:"error,omitempty"`
 	} `json:"keywords,omitempty"`
 }
 
@@ -175,12 +162,8 @@ type UpdateKeywordsRequestV3 struct {
 }
 type UpdateKeywordsResponseV3 struct {
 	Keywords struct {
-		Success []struct {
-			KeywordID string         `json:"keywordId,omitempty"`
-			Index     int            `json:"index,omitempty"`
-			Keyword   KeywordsDataV3 `json:"keyword,omitempty"`
-		} `json:"success,omitempty"`
-		Error []Error `json:"error,omitempty"`
+		Success []KeywordsSuccessV3 `json:"success,omitempty"`
+		Error   []Error             `json:"error,omitempty"`
 	} `json:"keywords,omitempty"`
 }
 

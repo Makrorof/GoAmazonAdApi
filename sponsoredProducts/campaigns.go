@@ -1,7 +1,5 @@
 package sponsoredProducts
 
-import "time"
-
 type IListCampaignsRequest interface {
 	getNewResponse() IListCampaignsResponse
 	getVersion() int
@@ -34,6 +32,49 @@ type IUpdateCampaignsResponse interface {
 	getVersion() int
 }
 
+type Budget struct {
+	BudgetType      string  `json:"budgetType,omitempty"`
+	Budget          float64 `json:"budget,omitempty"`
+	EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
+}
+
+type CampaignV3AudienceSegments struct {
+	AudienceID          string `json:"audienceId,omitempty"`
+	AudienceSegmentType string `json:"audienceSegmentType,omitempty"`
+}
+type CampaignV3ShopperCohortBidding struct {
+	ShopperCohortType string                       `json:"shopperCohortType,omitempty"`
+	Percentage        int                          `json:"percentage,omitempty"`
+	AudienceSegments  []CampaignV3AudienceSegments `json:"audienceSegments,omitempty"`
+}
+type CampaignV3PlacementBidding struct {
+	Percentage int    `json:"percentage,omitempty"`
+	Placement  string `json:"placement,omitempty"`
+}
+type CampaignV3DynamicBidding struct {
+	ShopperCohortBidding []CampaignV3ShopperCohortBidding `json:"shopperCohortBidding,omitempty"`
+	PlacementBidding     []CampaignV3PlacementBidding     `json:"placementBidding,omitempty"`
+	Strategy             string                           `json:"strategy,omitempty"`
+}
+
+type CampaignV3 struct {
+	SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
+	OffAmazonSettings struct {
+		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
+	} `json:"offAmazonSettings,omitempty"`
+	EndDate        string                    `json:"endDate,omitempty"`
+	CampaignID     string                    `json:"campaignId,omitempty"`
+	DynamicBidding *CampaignV3DynamicBidding `json:"dynamicBidding,omitempty"`
+	Tags           map[string]string         `json:"tags,omitempty"`
+	PortfolioID    string                    `json:"portfolioId,omitempty"`
+	Name           string                    `json:"name,omitempty"`
+	TargetingType  string                    `json:"targetingType,omitempty"`
+	State          string                    `json:"state,omitempty"`
+	StartDate      string                    `json:"startDate,omitempty"`
+	Budget         *Budget                   `json:"budget,omitempty"`
+	ExtendedData   *ExtendedData             `json:"extendedData,omitempty"`
+}
+
 // region CreateV3
 type CreateCampaignsV3CampaignData struct {
 	SiteRestrictions  []string                `json:"siteRestrictions,omitempty"`
@@ -48,42 +89,11 @@ type CreateCampaignsV3CampaignData struct {
 	Budget            *BudgetFilter           `json:"budget,omitempty"`
 	Tags              map[string]string       `json:"tags,omitempty"`
 }
+
 type CreateCampaignsV3Success struct {
-	CampaignID string `json:"campaignId,omitempty"`
-	Index      int    `json:"index,omitempty"`
-	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
-		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
-		} `json:"offAmazonSettings,omitempty"`
-		EndDate        string `json:"endDate,omitempty"`
-		CampaignID     string `json:"campaignId,omitempty"`
-		DynamicBidding struct {
-			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType,omitempty"`
-				Percentage        int    `json:"percentage,omitempty"`
-				AudienceSegments  []struct {
-				} `json:"audienceSegments,omitempty"`
-			} `json:"shopperCohortBidding,omitempty"`
-			PlacementBidding []struct {
-				Percentage int    `json:"percentage,omitempty"`
-				Placement  string `json:"placement,omitempty"`
-			} `json:"placementBidding,omitempty"`
-			Strategy string `json:"strategy,omitempty"`
-		} `json:"dynamicBidding,omitempty"`
-		Tags          map[string]string `json:"tags,omitempty"`
-		PortfolioID   string            `json:"portfolioId,omitempty"`
-		Name          string            `json:"name,omitempty"`
-		TargetingType string            `json:"targetingType,omitempty"`
-		State         string            `json:"state,omitempty"`
-		StartDate     string            `json:"startDate,omitempty"`
-		Budget        struct {
-			BudgetType      string  `json:"budgetType,omitempty"`
-			Budget          float64 `json:"budget,omitempty"`
-			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
-		} `json:"budget,omitempty"`
-		ExtendedData *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"campaign,omitempty"`
+	CampaignID string      `json:"campaignId,omitempty"`
+	Index      int         `json:"index,omitempty"`
+	Campaign   *CampaignV3 `json:"campaign,omitempty"`
 }
 type CreateCampaignsRequestV3 struct {
 	Campaigns []CreateCampaignsV3CampaignData `json:"campaigns,omitempty"`
@@ -128,41 +138,9 @@ type UpdateCampaignsRequestV3 struct {
 	Campaigns []UpdateCampaignsRequestV3Data `json:"campaigns,omitempty"`
 }
 type UpdateCampaignsResponseV3Success struct {
-	CampaignID string `json:"campaignId,omitempty"`
-	Index      int    `json:"index,omitempty"`
-	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
-		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
-		} `json:"offAmazonSettings,omitempty"`
-		EndDate        string `json:"endDate,omitempty"`
-		CampaignID     string `json:"campaignId,omitempty"`
-		DynamicBidding struct {
-			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType,omitempty"`
-				Percentage        int    `json:"percentage,omitempty"`
-				AudienceSegments  []struct {
-				} `json:"audienceSegments,omitempty"`
-			} `json:"shopperCohortBidding,omitempty"`
-			PlacementBidding []struct {
-				Percentage int    `json:"percentage,omitempty"`
-				Placement  string `json:"placement,omitempty"`
-			} `json:"placementBidding,omitempty"`
-			Strategy string `json:"strategy,omitempty"`
-		} `json:"dynamicBidding,omitempty"`
-		Tags          map[string]string `json:"tags,omitempty"`
-		PortfolioID   string            `json:"portfolioId,omitempty"`
-		Name          string            `json:"name,omitempty"`
-		TargetingType string            `json:"targetingType,omitempty"`
-		State         string            `json:"state,omitempty"`
-		StartDate     string            `json:"startDate,omitempty"`
-		Budget        struct {
-			BudgetType      string  `json:"budgetType,omitempty"`
-			Budget          float64 `json:"budget,omitempty"`
-			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
-		} `json:"budget,omitempty"`
-		ExtendedData *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"campaign,omitempty"`
+	CampaignID string      `json:"campaignId,omitempty"`
+	Index      int         `json:"index,omitempty"`
+	Campaign   *CampaignV3 `json:"campaign,omitempty"`
 }
 type UpdateCampaignsResponseV3 struct {
 	Campaigns struct {
@@ -190,41 +168,9 @@ type DeleteCampaignsRequestV3 struct {
 	CampaignIDFilter *IDFilter `json:"campaignIdFilter,omitempty"`
 }
 type DeleteCampaignsResponseV3Success struct {
-	CampaignID string `json:"campaignId,omitempty"`
-	Index      int    `json:"index,omitempty"`
-	Campaign   struct {
-		SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
-		OffAmazonSettings struct {
-			OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
-		} `json:"offAmazonSettings,omitempty"`
-		EndDate        string `json:"endDate,omitempty"`
-		CampaignID     string `json:"campaignId,omitempty"`
-		DynamicBidding struct {
-			ShopperCohortBidding []struct {
-				ShopperCohortType string `json:"shopperCohortType,omitempty"`
-				Percentage        int    `json:"percentage,omitempty"`
-				AudienceSegments  []struct {
-				} `json:"audienceSegments,omitempty"`
-			} `json:"shopperCohortBidding,omitempty"`
-			PlacementBidding []struct {
-				Percentage int    `json:"percentage,omitempty"`
-				Placement  string `json:"placement,omitempty"`
-			} `json:"placementBidding,omitempty"`
-			Strategy string `json:"strategy,omitempty"`
-		} `json:"dynamicBidding,omitempty"`
-		Tags          map[string]string `json:"tags,omitempty"`
-		PortfolioID   string            `json:"portfolioId,omitempty"`
-		Name          string            `json:"name,omitempty"`
-		TargetingType string            `json:"targetingType,omitempty"`
-		State         string            `json:"state,omitempty"`
-		StartDate     string            `json:"startDate,omitempty"`
-		Budget        struct {
-			BudgetType      string  `json:"budgetType,omitempty"`
-			Budget          float64 `json:"budget,omitempty"`
-			EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
-		} `json:"budget,omitempty"`
-		ExtendedData *ExtendedData `json:"extendedData,omitempty"`
-	} `json:"campaign,omitempty"`
+	CampaignID string      `json:"campaignId,omitempty"`
+	Index      int         `json:"index,omitempty"`
+	Campaign   *CampaignV3 `json:"campaign,omitempty"`
 }
 type DeleteCampaignsResponseV3 struct {
 	Campaigns struct {
@@ -257,54 +203,11 @@ type ListCampaignsRequestV3 struct {
 	IncludeExtendedDataFields bool        `json:"includeExtendedDataFields,omitempty"`
 	NameFilter                *NameFilter `json:"nameFilter,omitempty"`
 }
-type ListCampaignsResponseV3Campaign struct {
-	SiteRestrictions  []string `json:"siteRestrictions,omitempty"`
-	OffAmazonSettings struct {
-		OffAmazonBudgetControlStrategy string `json:"offAmazonBudgetControlStrategy,omitempty"`
-	} `json:"offAmazonSettings,omitempty"`
-	EndDate        string `json:"endDate,omitempty"`
-	CampaignID     string `json:"campaignId,omitempty"`
-	DynamicBidding struct {
-		ShopperCohortBidding []struct {
-			ShopperCohortType string `json:"shopperCohortType,omitempty"`
-			Percentage        int    `json:"percentage,omitempty"`
-			AudienceSegments  []struct {
-				AudienceID          string `json:"audienceId,omitempty"`
-				AudienceSegmentType string `json:"audienceSegmentType,omitempty"`
-			} `json:"audienceSegments,omitempty"`
-		} `json:"shopperCohortBidding,omitempty"`
-		PlacementBidding []struct {
-			Percentage int    `json:"percentage,omitempty"`
-			Placement  string `json:"placement,omitempty"`
-		} `json:"placementBidding,omitempty"`
-		Strategy string `json:"strategy,omitempty"`
-	} `json:"dynamicBidding,omitempty"`
-	Tags          map[string]string `json:"tags,omitempty"`
-	PortfolioID   string            `json:"portfolioId,omitempty"`
-	Name          string            `json:"name,omitempty"`
-	TargetingType string            `json:"targetingType,omitempty"`
-	State         string            `json:"state,omitempty"`
-	StartDate     string            `json:"startDate,omitempty"`
-	Budget        struct {
-		BudgetType      string  `json:"budgetType,omitempty"`
-		Budget          float64 `json:"budget,omitempty"`
-		EffectiveBudget float64 `json:"effectiveBudget,omitempty"`
-	} `json:"budget,omitempty"`
-	ExtendedData struct {
-		LastUpdateDateTime   time.Time `json:"lastUpdateDateTime,omitempty"`
-		ServingStatus        string    `json:"servingStatus,omitempty"`
-		ServingStatusDetails []struct {
-			Name    string `json:"name,omitempty"`
-			HelpURL string `json:"helpUrl,omitempty"`
-			Message string `json:"message,omitempty"`
-		} `json:"servingStatusDetails,omitempty"`
-		CreationDateTime time.Time `json:"creationDateTime,omitempty"`
-	} `json:"extendedData,omitempty"`
-}
+
 type ListCampaignsResponseV3 struct {
-	TotalResults int                               `json:"totalResults,omitempty"`
-	Campaigns    []ListCampaignsResponseV3Campaign `json:"campaigns,omitempty"`
-	NextToken    string                            `json:"nextToken,omitempty"`
+	TotalResults int          `json:"totalResults,omitempty"`
+	Campaigns    []CampaignV3 `json:"campaigns,omitempty"`
+	NextToken    string       `json:"nextToken,omitempty"`
 }
 
 func (r *ListCampaignsRequestV3) getNewResponse() IListCampaignsResponse {
